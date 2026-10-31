@@ -17,6 +17,8 @@ build/
 corpus/raw/*.pdf
 corpus/text/
 corpus/measurements.json
+corpus/chunks.jsonl
+corpus/chunks.json
 
 # Editors / OS
 .vscode/

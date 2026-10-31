@@ -52,6 +52,13 @@ When the user says "continue" (or anything like it):
   `scripts/download_corpus.ps1` (reads the URLs from `sources.csv`).
 - `corpus/text/`, `corpus/measurements.json`: from `scripts/measure_corpus.py` (git-ignored,
   regenerate any time).
+- `corpus/chunks.jsonl` and `corpus/chunks.json` (the same chunks as one indented array, for
+  reading): both written by `uv run python -m bnm_rag.parse` in one run (~30 s), and
+  git-ignored because they hold the documents' full text. **Keep them in sync:** never edit
+  either by hand or write one without the other; a test fails if they differ. Parser tests on
+  the real PDFs skip when `corpus/raw/` is empty.
+- `corpus/curated/figures.yaml`: hand transcriptions of the 8 figures the parser cannot read
+  (pictures, one scrambled diagram); merged into the chunks with `figure: true`.
 - Licensing: index the documents, show short excerpts, always link to the source PDF. Never
   republish whole documents.
 

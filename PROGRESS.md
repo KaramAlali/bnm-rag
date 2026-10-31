@@ -2,21 +2,26 @@
 
 ## Now
 
-- **Current step:** 1 — Parser (PDF → `corpus/chunks.jsonl`)
-- **Next action:** add PyMuPDF (`uv add pymupdf`), then write fixture tests first for the
-  known paragraphs (RMiT S 8.1, e-KYC Appendix 2 Table 1, the "value3,4" footnote case) and
-  build the parser in `src/bnm_rag/` until they pass; then compare S/G counts with
-  `corpus/measurements.json` (881/229).
-- **Open questions for Karam:** none
-- **Read for this step:** `docs/02-phase1-plan.md` → "Build steps", step 1, and
-  `docs/01-corpus-report.md`.
+- **Current step:** 2 — Metadata
+- **Next action:** write `src/bnm_rag/metadata/` that reads each policy document's Part A
+  chunks from `corpus/chunks.jsonl` (sections 4 Effective date, 6 Related documents, 7
+  Superseded) and produces per-chunk `effective_from` (date or `pending: <event>`), starting with
+  tests for every case in report finding 3 (Tech Requirements = issue + 1 year; RMiT 10.31;
+  IFTF 4.1 → Appendix II; Merchant Acquiring staggered; Complaints 12.1–12.4; Open Finance
+  proposed). Then `corpus/curated/applicability.yaml`, FAQ links (chunks already carry
+  `para_refs`), and the out-of-corpus list from section 6.
+- **Open questions for Karam:** check the 8 transcriptions in `corpus/curated/figures.yaml`
+  against the PDF pages listed there, then fill in its "Checked … by" line.
+- **Read for this step:** `docs/02-phase1-plan.md` → "Build steps", step 2, and "The chunk";
+  `docs/01-corpus-report.md` findings 3, 7, 8, 9. Run `uv run python -m bnm_rag.parse` first
+  (`chunks.jsonl` and `chunks.json` are git-ignored; the parser writes both).
 
 ## Steps (Phase 1)
 
 Details and the check for each step: `docs/02-phase1-plan.md` → "Build steps".
 
 - [x] 0. Repo setup
-- [ ] 1. Parser (PDF → `corpus/chunks.jsonl`)
+- [x] 1. Parser (PDF → `corpus/chunks.jsonl`)
 - [ ] 2. Metadata (Part A, applicability YAML, FAQ links, out-of-corpus list)
 - [ ] 3. Golden set (`evals/golden.yaml`, reviewed by Karam)
 - [ ] 4. Index (Azure AI Search Free tier; retrieval comparison)
@@ -28,6 +33,28 @@ Details and the check for each step: `docs/02-phase1-plan.md` → "Build steps".
 ## Log
 
 Newest first. One entry per work session: what was done, decisions, anything surprising.
+
+- 2026-10-31 — Step 1 follow-up after Karam spotted Open Finance Diagram 1 missing and MCIPD
+  13.2 at 15.6k chars. A check of every page line against the chunks found 7 figures that are
+  pictures with no text layer (Sandbox Appendices I/III/IV incl. the Green Lane mechanism,
+  Sandbox FAQ Q1's eligibility table, Complaints Appendix I, the RMiT/TR FAQ key-management
+  diagram) plus the scrambled vector diagram. Decision: hand-transcribe them in
+  `corpus/curated/figures.yaml` (not OCR or a vision LLM: 8 figures, one blurry); chunks get
+  `figure: true`. Also: MCIPD's table split per item (`13.2 / item n`, fixed columns; Karam
+  chose 13.2, where it is printed, over 13.1, which makes it binding); stacked headings kept and wrapped ones joined; appendices keep a section level; Open Finance
+  preface chunk (no officers' emails); lone U+FFFD glyph = bullet. 2,157 chunks, S/G still
+  886/229. The parser now also writes `corpus/chunks.json` (same chunks, indented array, for
+  reading) in the same run; a test checks the two match. 46 tests pass. Report finding 11.
+
+- 2026-10-31 — Step 1 parser done: `src/bnm_rag/parse/` (layout → chunk → document),
+  `uv run python -m bnm_rag.parse` writes 2,146 chunks in ~30 s. 37 tests pass (16 rule tests
+  run anywhere; 21 on the real PDFs skip without them). S/G counts are exact at 886/229; the
+  measurement script's 881 missed MCIPD 8.1–8.4 and Merchant Acquiring 14.6 (report finding 10).
+  Decisions: `chunks.jsonl` git-ignored (full text = republishing); FAQ chunks are "Q: …\nA: …"
+  with `para_refs` from "[Paragraph x.y]"; e-KYC FAQ and Complaints FS split by fixed column
+  positions (`TABLE_LAYOUTS`); repeated numbers get the part/sub-heading in `para_no`
+  (e.g. `emoney_faq:Part B / Q1`). Known limits: 5.2 definition chunks are 4.5k–15.6k chars
+  (revisit in step 4); a footnote carried onto a page with no new footnote isn't detected.
 
 - 2026-10-31 — Created the public repo https://github.com/KaramAlali/bnm-rag and pushed
   `main`. Step 0 done.

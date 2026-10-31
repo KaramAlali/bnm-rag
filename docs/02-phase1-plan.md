@@ -102,7 +102,7 @@ Azure account also gets a 30-day $200 credit.
 doc_id, version (reference + issue date + file hash), kind (policy_document | faq |
 feedback_statement | exposure_draft), reference, title,
 part, section, para_no ("8.1", "Appendix 5 / 3.2"), heading_path,
-obligation (S | G | none), text, footnotes[],
+obligation (S | G | none), text, footnotes[], figure (text includes a hand transcription),
 page_start, page_end, source_url,
 effective_from (date | "pending: <event>"), applies_to [entity types],
 faq_links [para_no], related_docs [titles]
@@ -131,7 +131,14 @@ the model (the Aina/Kedai Rumah validation pattern).
 1. **Parser.** PDF → `corpus/chunks.jsonl`: paragraphs with sub-items, S/G, appendix headers,
    footnotes moved out of the body, page numbers. *Check:* fixture tests on known paragraphs
    (e.g. RMiT S 8.1, e-KYC Appendix 2 Table 1, the "value3,4" footnote case); S/G counts match
-   `corpus/measurements.json` (881/229) within a stated tolerance.
+   `corpus/measurements.json` (881/229) within a stated tolerance. *Done:* counts match exactly
+   once the measurement regex's 5 misses are accounted for (886/229, report finding 10).
+   `corpus/chunks.jsonl` (and `corpus/chunks.json`, the same chunks as an indented array for
+   reading, written in the same run) are git-ignored: they hold the full text, so committing
+   them would republish the documents. Regenerate with `uv run python -m bnm_rag.parse` (~30 s).
+   A check of every page line against the chunks then found text lost in figures and stacked
+   headings (report finding 11); the 8 figures are hand-transcribed in
+   `corpus/curated/figures.yaml` and chunks carrying one have `figure: true`.
 2. **Metadata.** Part A parser (effective dates and exceptions, superseded and related docs),
    merge with `sources.csv`, curated `applicability.yaml` (the Tech Requirements tiers, IFTF
    Table 1), FAQ → paragraph links, the out-of-corpus list. *Check:* tests for every effective-date

@@ -1,0 +1,115 @@
+# Figures the parser cannot read, transcribed by hand from the PDF (corpus report finding 11).
+#
+# Most are pictures with no text layer; Open Finance Diagram 1 has text, but its boxes come
+# out interleaved, so `region` (points on that page: x0, y0, x1, y1) drops the PDF's own text
+# there before parsing. A figure's text is added to the chunk with the same para_no, or becomes
+# a chunk of its own. Chunks carrying a transcription have "figure": true.
+#
+# Checked against the PDF page by: (not yet; Karam to check)
+
+- doc_id: open-finance_ed
+  para_no: 1 / Diagram 1
+  page: 4
+  region: [60, 520, 600, 770]
+  text: |
+    Potential use cases:
+    • Single account view, including personal financial management
+    • Credit underwriting through real-time and accurate financial information
+    • Fully digital submission and transmission of documents in lieu of manual processes (e.g. email and webform)
+    Benefits for consumers: financial inclusion and access; better informed customer decisions; better user experience and convenience.
+    Benefits to financial industry: opportunities to grow business and partnerships; operational efficiency; risk management and fraud detection.
+    *Use cases listed are for illustrative purposes only and are not exhaustive nor indicative of endorsement from BNM.
+
+- doc_id: sandbox_pd
+  para_no: Appendix I
+  page: 26
+  appendix: Appendix I
+  heading_path: ["Appendix I: Overview of application and assessment process"]
+  text: |
+    Enhanced Standard Sandbox compared with the Green Lane, stage by stage.
+    Applicability. Standard Sandbox: fintech companies, new entrants and financial institutions regulated by the Bank; admission on a rolling basis (can apply anytime). Green Lane: financial institutions regulated by the Bank; institution admission on a cohort basis (two intakes, in January and July), following which solutions may be registered anytime.
+    Eligibility / qualification criteria. Standard Sandbox, Stage 1: Eligibility assessment: simplified assessment with these key changes: a more facilitative process for applicants to demonstrate value proposition, e.g. without proof-of-concept; greater focus on the ability of applicants to identify risks appropriately. The Bank endeavours to inform applicants within 15 working days. Green Lane, qualification at institutional level: confirmation that the financial institution meets standards on institutional risk management, compliance and governance capabilities; submission of a list of all potential solutions and the aggregate cap of expected financial losses; the Bank endeavours to inform its decision on approval within 30 working days. Green Lane, qualification at solution level: limit of 20,000 customers and up to 12 months of testing; regulatory flexibility provided unless specified as out-of-scope.
+    Review before go-live. Standard Sandbox, Stage 2: Preparation for go-live: validation of preconditions for live test; finalisation of testing parameters, KPIs and exit plan; approval given with or without conditions for go-live. Green Lane, simplified review: registration of solutions at least 15 working days prior to go-live; attestation and indemnity of customers against direct financial losses.
+    For a rejected Standard Sandbox application, a cooling-off period of six (6) months shall be observed before the applicant is allowed to resubmit the application.
+    Live-testing: submission of interim reports to the Bank and preparation of a final report post-testing.
+    Post-test outcomes and next steps:
+    • Participant is unable to continue testing (unsuccessful testing, revoked approval or no interest to continue operations): termination of testing and orderly winding down.
+    • Participant seeks to continue operations and can comply with existing laws and regulatory requirements: graduate from the sandbox and comply with existing regulations.
+    • Participant seeks to continue operations but is incompatible with existing laws and regulatory requirements: subject to discussion with the Bank on a case-by-case basis.
+
+- doc_id: sandbox_pd
+  para_no: Appendix III
+  page: 32
+  appendix: Appendix III
+  heading_path: ["Appendix III: Overview of prototype development for Standard Sandbox"]
+  text: |
+    Submission of application, then Stage 1 assessment and approval: the applicant is expected to have in place a realistic business plan to demonstrate a semi-functional prototype within 3 months from the point of application.
+    Development of a semi-functional prototype within 3 months. The applicant must demonstrate a semi-functional prototype which at minimum meets these expectations:
+    • a medium-fidelity prototype that gives a comprehensive and clear description and visualisation of the envisioned concept of the proposed solution;
+    • may or may not be demonstrated using the actual systems, protocols or technologies;
+    • ability to demonstrate conceptually and clearly envision the user experience and/or customer journey; end-to-end system workflows and all interactive components, including systems integration; and flow of funds between transacting parties, where applicable.
+    Stage 2 assessment: development of a fully functional prototype, taking into account inputs and feedback from semi-functional prototype testing and from the Bank's ongoing Stage 2 assessment. The applicant is assessed for readiness of the solution based on a fully functional prototype which shall meet these expectations:
+    • a high-fidelity prototype that demonstrates readiness of the actual solution to be deployed for the Sandbox;
+    • uses the actual systems, protocols and technologies, including from the front-end to back-end process;
+    • ability to simulate the actual solution to demonstrate comprehensively and clearly the user experience and/or customer journey; end-to-end system workflows and all interactive components, including systems integration; and flow of funds between transacting parties, where applicable.
+    Reiterations or enhancement of the fully functional prototype where needed, and comprehensive end-to-end testing of the solution to the Bank's satisfaction, prior to the live testing stage.
+
+- doc_id: sandbox_pd
+  para_no: Appendix IV
+  page: 33
+  appendix: Appendix IV
+  heading_path: ["Appendix IV: Overview of Green Lane's operational mechanism"]
+  text: |
+    Level 1: Approved institutions. Safeguards:
+    A. Review of risk management capability: financial institutions (FI) will need to apply for the Green Lane, which will entail an evaluation by the Bank based on the FI's track record. This includes submission of an overview of all potential projects to be tested and the aggregate cap of expected financial losses.
+    B. Ongoing supervisory assessments: the Bank's approval granted to a Green Lane participating institution shall remain effective unless otherwise revoked by the Bank. Adverse findings arising from the Bank's continuous supervision of a FI may result in regulatory intervention which may negatively impact the Bank's assessment of whether the FI should continue to use the Green Lane.
+    An institution must be approved to utilise the Green Lane.
+    Level 2: Qualified solutions. Safeguards:
+    A. Parameters to limit size and scale of Green Lane activities: to limit risks, tests in live environments are limited to a period of 12 months and up to 20,000 unique customers per solution. FIs which are approved for the Green Lane (Green Lane participating institutions) provide an assessment of the aggregate cap of expected financial losses.
+    B. Negative list basis on out-of-scope regulatory flexibilities: Green Lane participating institutions may be granted regulatory flexibilities unless otherwise specified through a written notification by the Bank to the Green Lane participating institutions.
+    A solution must be within the scope of eligible projects and regulatory flexibilities.
+    Level 3: Solution-level commitments. Safeguards:
+    A. Attestations and commitments by participating institutions: decision-makers of a Green Lane participating institution must commit towards ensuring their solution is aligned with principles specified by the Bank, including fully indemnifying financial consumers against direct financial losses.
+    B. Registration prior to go-live: Green Lane participating institutions must submit basic project details to the Bank at least 15 working days prior to the expected launch for live testing. They can proceed with live testing after registration is completed with the necessary details, upon notification by the Bank.
+
+- doc_id: sandbox_faq
+  para_no: Q1
+  page: 2
+  text: |
+    Eligibility (Standard Sandbox | Green Lane):
+    Financial institutions, referring to licensed banks including licensed digital banks; licensed Islamic banks including licensed Islamic digital banks; licensed investment banks; prescribed development financial institutions; licensed insurers including professional reinsurers; licensed takaful operators including professional retakaful operators; licensed money services business; approved issuers of designated Islamic payment instruments; approved issuers of designated payment instruments | eligible | eligible
+    Financial institutions in partnership with a fintech company* | eligible | eligible
+    An approved and registered intermediary, an approved operator of a payment system or a registered merchant acquirer in partnership with a fintech company* | eligible | not eligible
+    Fintech company | eligible | not eligible
+    Approved and registered intermediaries | eligible | not eligible
+    Registered merchant acquirer | eligible | not eligible
+    Approved operator of a payment system | eligible | not eligible
+
+- doc_id: complaints_pd
+  para_no: Appendix I
+  page: 14
+  text: |
+    Sample flowchart for customers, headed "Are you dissatisfied with any of our products and services?" with the FSP's logo and name.
+    Stage 1: Lodge a complaint. Lodge a complaint to the FSP; receive a written acknowledgment within one (1) working day. For simple cases, allow up to 5 working days to receive a response from the FSP. For complex cases, allow up to 20 working days to receive a response from the FSP (depending on the nature and complexity of the case, such as when third-party information or documentation is required).
+    Stage 2: Redress, in the event of disagreement with the FSP's final decision.
+    • Case falls under the Financial Markets Ombudsman Service (FMOS) jurisdiction (within monetary limit or scope): lodge at FMOS.
+    • Case beyond FMOS's monetary limit: if the FSP and complainant agree for the case to be handled by FMOS, lodge at FMOS; if either disagrees, lodge at BNMLINK.
+    • Case outside FMOS's scope: lodge at BNMLINK.
+    If the customer disagrees with the decision by FMOS or BNMLINK: refer the case to court for civil action.
+    FMOS is appointed by Bank Negara Malaysia and the Securities Commission Malaysia and offers free, independent and impartial dispute resolution services for financial consumers and investors, focusing on financial and capital market disputes involving direct financial losses. A QR code links to FMOS's monetary limit and scope.
+    How to lodge a complaint: the FSP's email address, telephone number, mailing address and branch address.
+
+- doc_id: rmit_faq
+  para_no: Q65
+  page: 22
+  text: &key_patterns |
+    Diagram: cloud key management patterns, from least to fully independent of the cloud service provider (CSP):
+    • CSP managed keys: the CSP manages everything; the cloud customer uses the encrypted service with no key control.
+    • CSP with customer managed keys: the key lives inside the CSP's KMS (backed by HSMs), but the cloud customer controls its policies and usage.
+    • CSP with customer imported keys: the key is generated in the cloud customer's KMS (independent custodian or on premise), then a copy is securely imported into the CSP's KMS.
+    • Externally managed keys: the cloud customer generates and retains keys entirely outside the CSP. During encryption or decryption operations the key may be used temporarily, but it is never stored, cached or accessible to the CSP.
+
+- doc_id: techreq-psr_faq
+  para_no: Q60
+  page: 23
+  text: *key_patterns
