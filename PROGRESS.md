@@ -2,19 +2,20 @@
 
 ## Now
 
-- **Current step:** 0 — Repo setup (committed locally; check passes)
-- **Next action:** create the GitHub repo when Karam says so
-  (`gh repo create bnm-rag --public --source . --push`), then tick step 0. Step 1 (parser)
-  can start meanwhile; it doesn't need the remote.
-- **Open questions for Karam:** when to create the public repo `KaramAlali/bnm-rag`.
-- **Read for this step:** nothing more. For step 1: `docs/02-phase1-plan.md` → "Build steps",
-  step 1, and `docs/01-corpus-report.md`.
+- **Current step:** 1 — Parser (PDF → `corpus/chunks.jsonl`)
+- **Next action:** add PyMuPDF (`uv add pymupdf`), then write fixture tests first for the
+  known paragraphs (RMiT S 8.1, e-KYC Appendix 2 Table 1, the "value3,4" footnote case) and
+  build the parser in `src/bnm_rag/` until they pass; then compare S/G counts with
+  `corpus/measurements.json` (881/229).
+- **Open questions for Karam:** none
+- **Read for this step:** `docs/02-phase1-plan.md` → "Build steps", step 1, and
+  `docs/01-corpus-report.md`.
 
 ## Steps (Phase 1)
 
 Details and the check for each step: `docs/02-phase1-plan.md` → "Build steps".
 
-- [ ] 0. Repo setup
+- [x] 0. Repo setup
 - [ ] 1. Parser (PDF → `corpus/chunks.jsonl`)
 - [ ] 2. Metadata (Part A, applicability YAML, FAQ links, out-of-corpus list)
 - [ ] 3. Golden set (`evals/golden.yaml`, reviewed by Karam)
@@ -28,6 +29,8 @@ Details and the check for each step: `docs/02-phase1-plan.md` → "Build steps".
 
 Newest first. One entry per work session: what was done, decisions, anything surprising.
 
+- 2026-10-31 — Created the public repo https://github.com/KaramAlali/bnm-rag and pushed
+  `main`. Step 0 done.
 - 2026-10-31 — Step 0 local setup: `git init` (branch `main`), `uv init --lib` (package
   `bnm_rag` in `src/`, Python 3.12+), dev deps ruff + pytest, ruff rules E/F/W/I/B/UP/SIM at
   100 cols, pytest markers `llm`/`azure` excluded by default, `.gitignore`, `.env.example`
