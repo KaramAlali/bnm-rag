@@ -1,0 +1,35 @@
+[project]
+name = "bnm-rag"
+version = "0.1.0"
+description = "Answers questions about Bank Negara Malaysia payments and e-money rules, with paragraph-level citations."
+readme = "README.md"
+authors = [
+    { name = "KaramAlali", email = "183481057+KaramAlali@users.noreply.github.com" }
+]
+requires-python = ">=3.12"
+dependencies = []
+
+[build-system]
+requires = ["uv_build>=0.12.13,<0.13.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+    "ruff>=0.17.3",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-m 'not llm and not azure'"
+markers = [
+    "llm: calls an LLM (opt-in: uv run pytest -m llm)",
+    "azure: calls Azure services (opt-in: uv run pytest -m azure)",
+]

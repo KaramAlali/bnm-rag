@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+dist/
+build/
+*.egg-info/
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Corpus: PDFs are re-downloaded from corpus/sources.csv; text and measurements are regenerated
+corpus/raw/*.pdf
+corpus/text/
+corpus/measurements.json
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
