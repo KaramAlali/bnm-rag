@@ -81,6 +81,12 @@ Each finding ends with the decision it leads to.
      (its 2.2 keeps main-body requirements on the main body's date); IFTF Appendix II gives
      9.3, 9.4, 9.8, 9.11 the Nexus date and 9.7(b), 9.12(b) 30 June 2028; Open Finance staggers
      paragraph 8.4 by firm size (2027, 2028, 2029) and 8.6 from 2028.
+   - Found in step 3: Tech Requirements 7.1 supersedes the technology sections of other
+     documents: e-Money PD 27-31, Merchant Acquiring 17-21 (7.1 says "17 to 22", but 22 holds
+     no IT requirements) and PSO 18-19 (for operators of designated payment systems only,
+     since 2.3 excludes other operators). Read as taking effect on 12 March 2027, so until
+     then an e-wallet's tech rules are e-Money PD 27-31. Chunks get `effective_until`; status
+     becomes `superseded`.
    → Per-chunk `effective_from` (a date, or `pending: <event>`) and `kind`. Status
    (`in force` / `not yet in force` / `proposed`) is computed at question time against today's
    date, never stored.

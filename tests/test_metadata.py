@@ -65,8 +65,9 @@ def test_every_exception_names_a_known_document_and_a_quote():
     for e in load_exceptions():
         assert e["doc_id"] in DOC_IDS
         assert e["paras"] and e["source"] and e["quote"]
-        start = e["from"]
-        assert isinstance(start, dt.date) or str(start).startswith("pending: ")
+        assert ("from" in e) != ("until" in e)
+        day = e.get("from", e.get("until"))
+        assert isinstance(day, dt.date) or str(day).startswith("pending: ")
 
 
 # --- status (computed, never stored) ------------------------------------------------------
@@ -84,6 +85,12 @@ def test_status_is_computed_against_the_day():
 def test_exposure_draft_is_proposed_whatever_date_it_states():
     draft = rule(kind="exposure_draft", start="2027-01-01")
     assert status(draft, dt.date(2030, 1, 1)) == "proposed"
+
+
+def test_superseded_once_replaced():
+    c = rule(start="2025-01-31") | {"effective_until": "2027-03-12"}
+    assert status(c, TODAY) == "in force"
+    assert status(c, dt.date(2027, 3, 12)) == "superseded"
 
 
 def test_faqs_have_no_status():

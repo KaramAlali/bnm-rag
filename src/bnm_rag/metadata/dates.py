@@ -85,21 +85,29 @@ def assign_dates(chunks: list[dict], issued: dict[str, dt.date | None]) -> None:
         default = document_default(doc_chunks, issued.get(doc_id)) if rules else None
         for c in doc_chunks:
             c["effective_from"] = default.isoformat() if default else None
+            c["effective_until"] = None
             c["effective_exceptions"] = []
             c["effective_note"] = None
         for e in (e for e in exceptions if e["doc_id"] == doc_id):
+            if ("from" in e) == ("until" in e):
+                raise ValueError(f"effective_dates.yaml: {doc_id} {e['paras']} needs from or until")
             hit = [c for c in doc_chunks if matches_any(c, e["paras"])]
             if not hit:
                 raise ValueError(f"effective_dates.yaml: {doc_id} {e['paras']} matches no chunk")
+            start = _as_text(e["from"]) if "from" in e else None
+            end = _as_text(e["until"]) if "until" in e else None
+            source = f"{e['source_doc']} {e['source']}" if e.get("source_doc") else e["source"]
             for c in hit:
-                start = _as_text(e["from"])
                 if e.get("items") or e.get("who"):
                     c["effective_exceptions"].append({
                         "from": start,
+                        "until": end,
                         "items": e.get("items"),
                         "who": " ".join(e["who"].split()) if e.get("who") else None,
-                        "source": e["source"],
+                        "source": source,
                     })
+                elif end:
+                    c["effective_until"] = end
                 else:
                     c["effective_from"] = start
                 if e.get("note"):

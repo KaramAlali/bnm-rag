@@ -7,10 +7,12 @@
 #   doc_id, paras    which paragraphs (selectors: "12.1-12.4", "9.3", "16" for all of 16.x,
 #                    "Appendix 12" for a whole appendix)
 #   from             an ISO date, or "pending: <event>" when no date is set yet
+#   until            instead of `from`: the date the paragraph stops applying (superseded)
 #   items            only these sub-items of the paragraph move (the rest keep the default)
 #   who              only these firms get the different date (others keep the default)
 #   source, quote    the paragraph that sets the date and words copied from it; a test checks
 #                    the quote appears in that chunk, so this file cannot drift from the PDF
+#   source_doc       when that paragraph is in another document (default: doc_id)
 #
 # Status (in force / not yet in force / proposed) is never stored: it is computed from `kind`
 # and these dates at answer time (src/bnm_rag/metadata/status.py).
@@ -96,3 +98,34 @@
   from: 2028-01-01
   source: "9.2"
   quote: "by 1 January 2028 or the date on which the FSP’s obligations under paragraph 8.4 commence, whichever is later"
+
+# Superseded by Tech Requirements 7.1. Read as taking effect with Tech Requirements itself
+# (12 March 2027): until then these are the technology rules for e-money issuers, acquirers
+# and operators.
+- doc_id: emoney_pd
+  paras: ["27-31"]
+  until: 2027-03-12
+  source_doc: techreq-psr_pd
+  source: "7.1"
+  quote: "Paragraphs 27 to 31 of the Policy Document on Electronic Money (E-Money)"
+
+- doc_id: merchant-acq_pd
+  paras: ["17-21"]
+  until: 2027-03-12
+  source_doc: techreq-psr_pd
+  source: "7.1"
+  quote: "Paragraphs 17 to 22 of the Policy Document on Merchant Acquiring Services"
+  note: >-
+    Tech Requirements 7.1 names paragraphs 17 to 22, but supersedes "the IT requirements" in
+    them and paragraph 22 (Other Compliance Requirements) has none, so 22 stays in force.
+
+- doc_id: pso_pd
+  paras: ["18-19"]
+  who: operators of a designated payment system
+  until: 2027-03-12
+  source_doc: techreq-psr_pd
+  source: "7.1"
+  quote: "Paragraphs 18 to 19 of the Policy Document on Payment System Operator"
+  note: >-
+    Tech Requirements 2.3 excludes other approved operators, so for them PSO 18-19 stay in
+    force.

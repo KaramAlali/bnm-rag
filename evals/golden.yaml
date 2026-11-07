@@ -1,0 +1,743 @@
+# Golden set (Phase 1 plan, step 3): the questions the app must get right, written BEFORE
+# retrieval so the retrieval comparison (step 4) and the agent (step 5) are scored honestly.
+#
+# Persona: a compliance or tech lead at an e-wallet or payment gateway, unless `firm` says
+# otherwise. Answers are judged as of `as_of` (status depends on the date).
+#
+# Fields
+#   id            g01…
+#   question      as the user would type it (lang: en or ms; answers are in English)
+#   firm          roles from corpus/curated/applicability.yaml the asker holds; [] = not said
+#   coverage      answered | partial | not_covered
+#   expected      chunk_ids a correct answer must cite (retrieval recall@5 is measured on these)
+#   also_ok       further chunk_ids that are fine to cite
+#   must_say      facts the answer must contain (checked by an LLM judge, spot-checked by hand)
+#   must_not_say  claims that make the answer wrong
+#   pointer       for partial / not_covered: the document that would cover it
+#   tags          done (the plan's four "done" questions), draft, rmit-vs-tr, date, threshold,
+#                 faq, applicability, out-of-corpus, malay, superseded
+#   reviewed      set to true once Karam has checked the expected answer against the PDF
+#
+# A test (tests/test_golden.py) checks the format, the roles, and that every chunk_id exists.
+
+as_of: 2026-11-07
+
+questions:
+
+# --- The four "done" questions (plan: What "done" means for Phase 1) -----------------------
+
+- id: g01
+  question: We're an e-wallet with RM800m a year. Which tech rules apply and when?
+  lang: en
+  firm: []
+  coverage: answered
+  expected: [techreq-psr_pd:2.4, techreq-psr_pd:4.1, techreq-psr_pd:7.1]
+  also_ok: [techreq-psr_pd:2.2, techreq-psr_pd:2.5, techreq-psr_faq:Q4,
+            emoney_pd:Appendix 1 / 1, emoney_pd:27.1, rmit_pd:5.2]
+  must_say:
+    - The Technology Requirements policy document comes into effect on 12 March 2027.
+    - With RM800m a year the value is under the RM1.5 billion threshold, so the e-wallet is
+      Tier-3 unless its volume is above 7 million transactions a year (then Tier-2).
+    - If the e-wallet is an eligible e-money issuer (e.g. 500,000 active users or a 5% market
+      share), it is Tier-1 and follows RMiT instead.
+    - Until 12 March 2027 the e-Money policy document's technology paragraphs (27 to 31) apply.
+  must_not_say:
+    - The Technology Requirements are in force now.
+    - RMiT applies to every e-wallet.
+  tags: [done, rmit-vs-tr, threshold, date, superseded]
+  reviewed: true
+
+- id: g02
+  question: Does our e-wallet have to share customer data under BNM's open finance rules, and from when?
+  lang: en
+  firm: [eligible_emi]
+  coverage: answered
+  expected: [open-finance_ed:Appendix 1 / 1, open-finance_ed:Appendix 2 / 1]
+  also_ok: [open-finance_ed:preface, open-finance_ed:4.1, open-finance_ed:8.4]
+  must_say:
+    - Open finance is an exposure draft, a proposal, not a rule in force.
+    - The draft proposes that an eligible EMI with a network-based e-money solution and more
+      than five million active users would be a mandated FSP.
+    - For such EMIs the proposed start is 1 January 2029.
+  must_not_say:
+    - The open finance requirements are in force or binding.
+    - The e-wallet must comply from 1 January 2027.
+  tags: [done, draft, threshold]
+  reviewed: true
+
+- id: g03
+  question: What licence do we need from BNM to run a crypto exchange in Malaysia?
+  lang: en
+  firm: []
+  coverage: not_covered
+  expected: []
+  also_ok: []
+  must_say:
+    - The indexed BNM documents do not cover crypto or digital asset exchanges.
+  must_not_say:
+    - Any licensing requirement presented as coming from the indexed documents.
+  pointer: Securities Commission Malaysia (digital asset exchanges are regulated by the SC, not BNM)
+  tags: [done, out-of-corpus]
+  reviewed: true
+
+- id: g04
+  question: What are our suspicious transaction reporting obligations under AML/CFT?
+  lang: en
+  firm: [standard_emi]
+  coverage: not_covered
+  expected: []
+  also_ok: [emoney_pd:6.1, ekyc_pd:6.1]
+  must_say:
+    - AML/CFT reporting is not in the indexed documents.
+    - It is in BNM's AML/CFT/CPF and TFS for Financial Institutions policy document.
+  must_not_say:
+    - Any reporting deadline or threshold presented as coming from the indexed documents.
+  pointer: Policy Document on Anti-Money Laundering, Countering Financing of Terrorism, Countering Proliferation Financing and Targeted Financial Sanctions for Financial Institutions
+  tags: [done, out-of-corpus]
+  reviewed: true
+
+# --- The persona's own questions (plan: Who it's for) --------------------------------------
+
+- id: g05
+  question: Can we test a new product in BNM's sandbox first? What's the Green Lane, and can we use it?
+  lang: en
+  firm: [standard_emi]
+  coverage: answered
+  expected: [sandbox_pd:7.4, sandbox_pd:Appendix IV, sandbox_pd:5.2, sandbox_pd:7.6]
+  also_ok: [sandbox_pd:7.1, sandbox_pd:7.7, sandbox_faq:Q11, sandbox_faq:Q1]
+  must_say:
+    - The Green Lane is a faster sandbox track for financial institutions with a strong track
+      record in risk management, governance and compliance; it needs BNM's prior approval.
+    - An approved e-money issuer counts as a financial institution under the Framework, so it may
+      apply; a fintech company on its own may not.
+    - Applications open twice a year, in January and in July.
+    - Green Lane tests are limited to 12 months and 20,000 unique customers per solution.
+  must_not_say:
+    - Fintech companies can apply to the Green Lane on their own.
+  tags: [applicability, faq]
+  reviewed: true
+
+- id: g06
+  question: What's the deadline to report a customer data breach to BNM?
+  lang: en
+  firm: [standard_emi]
+  coverage: answered
+  expected: [mcipd_pd:11.8, mcipd_pd:11.20, mcipd_pd:11.19]
+  also_ok: [mcipd_pd:11.11, mcipd_pd:11.21, mcipd_pd:11.16, mcipd_pd:11.17]
+  must_say:
+    - Notify BNM immediately on becoming aware of a breach that poses reputational risk, causes
+      or may cause significant harm, or involves a large number of customers.
+    - A large number means more than 1,000 affected customers.
+    - The investigation must be completed within three months of detecting the breach.
+    - For significant harm, more than 1,000 customers or a deliberate disclosure, the detailed
+      investigation report goes to BNM within one working day after it is tabled to the Board.
+  must_not_say:
+    - A 72-hour deadline (that is not in these documents).
+  tags: [threshold]
+  reviewed: true
+
+- id: g07
+  question: Do we need BNM approval to raise our wallet limit to RM5,000?
+  lang: en
+  firm: [standard_emi]
+  coverage: answered
+  expected: [emoney_pd:20.8, emoney_pd:20.9]
+  also_ok: [emoney_faq:Q6]
+  must_say:
+    - Yes. A wallet limit of RM5,000 or more needs BNM's prior written approval.
+    - Below RM5,000, notify BNM at least 14 days before, unless the functionality or product
+      features change (then approval is needed).
+  must_not_say:
+    - Notification alone is enough for RM5,000.
+  tags: [threshold, faq]
+  reviewed: true
+
+- id: g08
+  question: What does BNM require for our mobile app's security?
+  lang: en
+  firm: [standard_emi]
+  coverage: answered
+  expected: [emoney_pd:Appendix 8 / 1, techreq-psr_pd:Appendix 4 / 1]
+  also_ok: [emoney_pd:28.81, emoney_pd:28.83, techreq-psr_pd:7.1, techreq-psr_pd:4.1]
+  must_say:
+    - Today the e-Money policy document's Appendix 8 (control measures on mobile applications
+      and devices) applies.
+    - From 12 March 2027 Tech Requirements Appendix 4 (control measures for mobile applications
+      and devices) applies instead.
+    - Examples, such as running only on supported, uncompromised (not jailbroken or rooted)
+      operating systems.
+  must_not_say:
+    - RMiT's mobile appendix applies to a standard e-money issuer.
+  tags: [rmit-vs-tr, superseded, date]
+  reviewed: true
+
+- id: g09
+  question: Our e-wallet did RM2 billion in transactions last year but only 3 million transactions. Which Tech Requirements tier are we, and when must we comply?
+  lang: en
+  firm: [standard_emi]
+  coverage: answered
+  expected: [techreq-psr_pd:2.4, techreq-psr_pd:4.1]
+  also_ok: [techreq-psr_faq:Q4, techreq-psr_pd:2.5]
+  must_say:
+    - Tier-2, because the transaction value is above RM1.5 billion (either threshold is enough).
+    - Compliance from 12 March 2027.
+    - The tier is set every January from the past calendar year's value or volume.
+  must_not_say:
+    - Tier-3.
+  tags: [threshold, date]
+  reviewed: true
+
+- id: g10
+  question: Can we onboard customers with face verification? What error rate makes us report to BNM?
+  lang: en
+  firm: [standard_emi]
+  coverage: answered
+  expected: [ekyc_pd:8.10, ekyc_pd:Appendix 2 / 10]
+  also_ok: [ekyc_pd:8.21, ekyc_pd:Appendix 2 / 11, ekyc_pd:Appendix 2 / 5, ekyc_pd:5.2]
+  must_say:
+    - Yes, e-KYC may use biometric matching against a government-issued ID, with liveness
+      detection.
+    - Above a 3% false acceptance rate, do a risk assessment for the Board and an internal review.
+    - Above 5% for any two months within a four-month period, notify BNM and submit an
+      assessment within seven working days.
+  must_not_say: []
+  tags: [threshold]
+  reviewed: true
+
+- id: g11
+  question: Which BNM documents apply to a non-bank merchant acquirer?
+  lang: en
+  firm: [nonbank_acquirer]
+  coverage: answered
+  expected: [merchant-acq_pd:2.1, iftf_pd:2.2, techreq-psr_pd:5.2, rmit_pd:5.2]
+  also_ok: [techreq-psr_pd:2.4, techreq-psr_pd:2.6, sandbox_pd:2.1]
+  must_say:
+    - The Merchant Acquiring Services policy document.
+    - The Interoperable Fund Transfer Framework (acquirer paragraphs 9.10 to 9.13).
+    - The Technology Requirements from 12 March 2027.
+    - RMiT instead of the Technology Requirements if it has at least 5% of the non-bank merchant
+      acquiring market.
+  must_not_say: []
+  tags: [applicability, rmit-vs-tr]
+  reviewed: true
+
+- id: g12
+  question: What changed in the new RMiT?
+  lang: en
+  firm: [licensed_bank]
+  coverage: partial
+  expected: [rmit_pd:7.1]
+  also_ok: [rmit_pd:4.1, rmit_pd:10.31, rmit_pd:10.35, rmit_pd:Appendix 12 / 2.1, rmit_pd:18.1]
+  must_say:
+    - Only the current RMiT (re-issued 25 September 2026) is indexed, so a full comparison with
+      the earlier version is not possible.
+    - It supersedes the June 2023 RMiT and several fraud and e-banking letters (paragraph 7.1).
+  must_not_say:
+    - A detailed list of changes presented as coming from the documents.
+  pointer: Policy Document on Risk Management in Technology issued 1 June 2023 (earlier version)
+  tags: [date]
+  reviewed: true
+
+# --- Dates that differ inside a document (corpus report finding 3) -------------------------
+
+- id: g13
+  question: By when do we need stand-in processing for our key digital services?
+  lang: en
+  firm: [eligible_emi]
+  coverage: answered
+  expected: [rmit_pd:10.31, rmit_faq:Q18]
+  also_ok: [rmit_faq:Q17]
+  must_say:
+    - By 30 September 2027 (RMiT 10.31(c)).
+    - Stand-in processing should run on an independent or logically segregated capability, not
+      only an active-active setup (RMiT FAQ).
+  must_not_say:
+    - It is already required now.
+  tags: [date, faq]
+  reviewed: true
+
+- id: g14
+  question: When do we have to start publishing our service availability track record?
+  lang: en
+  firm: [eligible_emi]
+  coverage: answered
+  expected: [rmit_pd:10.35]
+  also_ok: [rmit_pd:10.32]
+  must_say:
+    - Quarterly, within 15 calendar days of quarter-end, beginning from 15 October 2027.
+  must_not_say: []
+  tags: [date]
+  reviewed: true
+
+- id: g15
+  question: Is the NCII Code of Practice in RMiT Appendix 12 in force?
+  lang: en
+  firm: [eligible_emi]
+  coverage: answered
+  expected: [rmit_pd:Appendix 12 / 2.1, rmit_pd:Appendix 12 / 2.2]
+  also_ok: [rmit_pd:Appendix 12 / 1.1, rmit_pd:13.3]
+  must_say:
+    - It comes into effect upon endorsement by the Chief Executive of NACSA; the documents give
+      no date.
+    - It applies only to entities BNM has designated as NCII entities.
+    - Requirements also in RMiT's main body keep the main body's dates.
+  must_not_say:
+    - It has been in force since 28 November 2025.
+  tags: [date]
+  reviewed: true
+
+- id: g16
+  question: When must banks let customers make cross-border QR and account-to-account payments under the IFTF?
+  lang: en
+  firm: [licensed_bank]
+  coverage: answered
+  expected: [iftf_pd:9.3, iftf_pd:Appendix II]
+  also_ok: [iftf_pd:4.1, iftf_pd:9.4, iftf_pd:9.8]
+  must_say:
+    - The date follows the live operationalisation of cross-border payments under the Nexus
+      scheme, which BNM has yet to announce.
+  must_not_say:
+    - From 30 June 2026.
+  tags: [date]
+  reviewed: true
+
+- id: g17
+  question: We run our own QR code network. Do we have to shut it down, and by when?
+  lang: en
+  firm: [eligible_emi]
+  coverage: answered
+  expected: [iftf_pd:9.7, iftf_pd:Appendix II]
+  also_ok: [iftf_pd:9.6, iftf_pd:4.1, iftf_pd:2.2]
+  must_say:
+    - An eligible EMI in a shared payment infrastructure must not operate or offer a proprietary
+      QR code scheme network.
+    - An existing one must be discontinued by 30 June 2028.
+    - During the transition no new merchants may be onboarded to it.
+  must_not_say: []
+  tags: [date]
+  reviewed: true
+
+- id: g18
+  question: How fast must we resolve a simple customer complaint?
+  lang: en
+  firm: [standard_emi]
+  coverage: answered
+  expected: [complaints_pd:11.5, complaints_pd:2.3, complaints_pd:5.2]
+  also_ok: [complaints_pd:2.4, complaints_pd:2.2, complaints_pd:Appendix II]
+  must_say:
+    - Financial service providers must decide simple cases within 5 working days.
+    - A standard e-money issuer is an approved person, not a financial service provider; only
+      paragraphs 12.1 to 12.4 bind it, and the rest is encouraged as best practice.
+  must_not_say:
+    - The standard e-money issuer is bound to the 5-working-day turnaround.
+  tags: [applicability, threshold]
+  reviewed: true
+
+- id: g19
+  question: We're an eligible e-money issuer. What are the turnaround times for complaints?
+  lang: en
+  firm: [eligible_emi]
+  coverage: answered
+  expected: [complaints_pd:11.3, complaints_pd:11.5, complaints_pd:11.6]
+  also_ok: [complaints_pd:Appendix II, complaints_pd:11.9, complaints_pd:4.1]
+  must_say:
+    - Written acknowledgement within the next working day.
+    - Simple cases within 5 working days, complex cases within 20 working days.
+    - In force since 1 April 2026.
+  must_not_say: []
+  tags: [date, applicability]
+  reviewed: true
+
+- id: g20
+  question: Do we have to tell customers about the ombudsman when we reject their complaint?
+  lang: en
+  firm: [standard_emi]
+  coverage: answered
+  expected: [complaints_pd:12.3, complaints_pd:12.4]
+  also_ok: [complaints_pd:12.2, complaints_pd:2.3]
+  must_say:
+    - Yes, refer them to the Financial Markets Ombudsman Service (FMOS) where the complaint is
+      within its jurisdiction; otherwise refer them to BNMLINK.
+    - This binds approved persons too, since 28 March 2025.
+  must_not_say: []
+  tags: [date, applicability]
+  reviewed: true
+
+- id: g21
+  question: What minimum capital does a non-bank merchant acquirer need?
+  lang: en
+  firm: [nonbank_acquirer]
+  coverage: answered
+  expected: [merchant-acq_pd:9.1, merchant-acq_pd:9.2, merchant-acq_pd:5.2]
+  also_ok: [merchant-acq_pd:9.3, merchant-acq_pd:4.2]
+  must_say:
+    - RM300,000 for a small acquirer and RM1,000,000 for a large acquirer, at all times.
+    - Large means an average monthly transaction value above RM10 million.
+  must_not_say: []
+  tags: [threshold]
+  reviewed: true
+
+# --- Thresholds and who a rule applies to ---------------------------------------------------
+
+- id: g22
+  question: When does an e-wallet become an "eligible" e-money issuer, and what changes for it?
+  lang: en
+  firm: [standard_emi]
+  coverage: answered
+  expected: [emoney_pd:Appendix 1 / 1, emoney_faq:Q3, rmit_pd:5.2]
+  also_ok: [emoney_faq:Q2]
+  must_say:
+    - At least 500,000 active users for six consecutive months, or a 5% market share of
+      e-money transaction volume, value or outstanding e-money liabilities.
+    - The EMI determines its own status.
+    - Eligible EMIs face higher regulatory expectations, including RMiT.
+  must_not_say: []
+  tags: [threshold, faq, rmit-vs-tr]
+  reviewed: true
+
+- id: g23
+  question: We're a non-bank merchant acquirer with 7% of the non-bank acquiring market. Does RMiT apply to us?
+  lang: en
+  firm: [nonbank_acquirer_major]
+  coverage: answered
+  expected: [rmit_pd:5.2, techreq-psr_pd:2.4, techreq-psr_pd:2.2, techreq-psr_faq:Q4]
+  also_ok: [rmit_pd:2.1, rmit_pd:2.2]
+  must_say:
+    - Yes. A non-bank acquirer with at least 5% of non-bank merchant acquiring value or volume is
+      a financial institution under RMiT (Tier-1).
+    - Of the Technology Requirements only paragraph 2.2 applies (2.7, 13.3 and Appendix 10).
+    - BNM notifies firms that fall under RMiT.
+  must_not_say:
+    - The Technology Requirements apply in full.
+  tags: [threshold, rmit-vs-tr, faq]
+  reviewed: true
+
+- id: g24
+  question: We're a non-bank credit card issuer with RM30 million annual revenue. Does all of the Complaints Handling policy apply to us?
+  lang: en
+  firm: [nonbank_card_issuer]
+  coverage: answered
+  expected: [complaints_pd:5.2, complaints_pd:2.3]
+  also_ok: [complaints_pd:2.2, complaints_pd:2.4, complaints_pd:12.1]
+  must_say:
+    - No. A non-bank credit card issuer is a financial service provider only above RM50 million
+      annual revenue; below that it is an approved person.
+    - Approved persons must comply with paragraphs 12.1 to 12.4 and are encouraged to adopt the rest.
+  must_not_say: []
+  tags: [threshold, applicability]
+  reviewed: true
+
+- id: g25
+  question: Our group has an e-wallet company and a remittance company on the same cloud setup. Do we count their transactions separately for the Tech Requirements tier?
+  lang: en
+  firm: [standard_emi, msb]
+  coverage: answered
+  expected: [techreq-psr_pd:2.5]
+  also_ok: [techreq-psr_pd:2.4]
+  must_say:
+    - No. Entities in the same group that share technology infrastructure or controls must
+      combine their value or volume against the RM1.5 billion and 7 million thresholds.
+  must_not_say: []
+  tags: [threshold]
+  reviewed: true
+
+- id: g26
+  question: As a Tier-3 payment services regulatee, do we need a CISO, and must they be independent?
+  lang: en
+  firm: [standard_emi]
+  coverage: answered
+  expected: [techreq-psr_pd:9.5, techreq-psr_pd:2.6, techreq-psr_pd:9.6, techreq-psr_faq:Q13]
+  also_ok: [techreq-psr_pd:4.1]
+  must_say:
+    - Yes, a CISO (by whatever name) must be designated (paragraph 9.5).
+    - For Tier-3, the independence requirement in 9.6 is treated as guidance (G), not a standard
+      (2.6(b)).
+    - BNM generally expects an entity-level CISO, but a group-level CISO can be used if the risk
+      profile allows (FAQ).
+    - These apply from 12 March 2027.
+  must_not_say: []
+  tags: [threshold, faq, date]
+  reviewed: true
+
+# --- RMiT vs Tech Requirements -----------------------------------------------------------------
+
+- id: g27
+  question: We're an eligible e-money issuer. Do we follow RMiT or the Technology Requirements?
+  lang: en
+  firm: [eligible_emi]
+  coverage: answered
+  expected: [rmit_pd:5.2, techreq-psr_pd:2.2, techreq-psr_pd:2.6]
+  also_ok: [techreq-psr_pd:2.4, rmit_pd:2.1, techreq-psr_faq:Q4]
+  must_say:
+    - RMiT. An eligible e-money issuer is a financial institution under RMiT (Tier-1).
+    - Of the Technology Requirements only paragraphs 2.7 and 13.3 apply (Appendix 10 only for
+      merchant acquiring business).
+  must_not_say:
+    - Technology Requirements paragraphs beyond 2.2 apply to it.
+  tags: [rmit-vs-tr]
+  reviewed: true
+
+- id: g28
+  question: What does BNM expect before we move critical systems to the public cloud?
+  lang: en
+  firm: [standard_emi]
+  coverage: answered
+  expected: [emoney_pd:28.51, techreq-psr_pd:10.50, techreq-psr_pd:10.51]
+  also_ok: [emoney_pd:28.53, techreq-psr_pd:Appendix 8, techreq-psr_pd:10.52, emoney_pd:18.18,
+            emoney_pd:18.19, techreq-psr_pd:7.1]
+  must_say:
+    - A comprehensive risk assessment before cloud adoption (deployment model, migration,
+      location, multi-tenancy, vendor lock-in and more).
+    - For critical systems on public cloud, the key risks and controls in Appendix 8, or
+      alternatives shown to be at least as effective.
+    - Today the e-Money policy document already requires a comprehensive risk assessment before
+      cloud adoption (28.51) and that cloud risks for critical systems be addressed (28.53).
+    - From 12 March 2027 the Technology Requirements (10.50, 10.51, Appendix 8) replace it.
+  must_not_say:
+    - RMiT's cloud consultation requirements apply to a standard e-money issuer.
+    - Nothing applies until 12 March 2027.
+  tags: [rmit-vs-tr, date]
+  reviewed: true
+
+- id: g29
+  question: Can we rely on virtual patching instead of applying patches?
+  lang: en
+  firm: [standard_emi]
+  coverage: answered
+  expected: [techreq-psr_faq:Q18]
+  also_ok: [techreq-psr_pd:10.17]
+  must_say:
+    - Virtual patching is an interim measure, not a substitute for a permanent fix.
+    - Use it only temporarily, with risk assessment and monitoring, until a tested permanent
+      patch is in place.
+  must_not_say: []
+  tags: [faq]
+  reviewed: true
+
+- id: g30
+  question: Which technology rules apply to our e-wallet today?
+  lang: en
+  firm: [standard_emi]
+  coverage: answered
+  expected: [emoney_pd:27.1, techreq-psr_pd:7.1]
+  also_ok: [techreq-psr_pd:4.1, techreq-psr_pd:2.4]
+  must_say:
+    - Today, the e-Money policy document's technology paragraphs 27 to 31.
+    - The Technology Requirements replace them from 12 March 2027.
+  must_not_say:
+    - The Technology Requirements already apply.
+    - RMiT applies (it does not to a standard e-money issuer).
+  tags: [superseded, date, rmit-vs-tr]
+  reviewed: true
+
+# --- e-money specifics ----------------------------------------------------------------------
+
+- id: g31
+  question: Where must we keep the money customers load into our e-wallet?
+  lang: en
+  firm: [standard_emi]
+  coverage: answered
+  expected: [emoney_pd:16.2, emoney_pd:16.3, emoney_pd:16.4]
+  also_ok: [emoney_pd:16.5]
+  must_say:
+    - In a trust account with a banking institution, set up under the Trustee Act 1949.
+    - The trust account must cover total outstanding e-money liabilities at all times.
+    - Shortfalls should be topped up within one working day (guidance).
+  must_not_say: []
+  tags: []
+  reviewed: true
+
+- id: g32
+  question: What happens to balances in wallets that have been inactive for years?
+  lang: en
+  firm: [standard_emi]
+  coverage: answered
+  expected: [emoney_faq:Q9]
+  also_ok: [emoney_faq:Q10]
+  must_say:
+    - After seven consecutive years of inactivity the balances are unclaimed moneys under the
+      Unclaimed Moneys Act 1965 and are lodged with the Registrar of Unclaimed Moneys.
+  must_not_say: []
+  tags: [faq]
+  reviewed: true
+
+- id: g33
+  question: Can we promote insurance products inside our e-wallet app?
+  lang: en
+  firm: [standard_emi]
+  coverage: answered
+  expected: [emoney_pd:22.1, emoney_pd:22.2]
+  also_ok: [emoney_faq:Q8]
+  must_say:
+    - Only with BNM's prior written approval.
+    - The board must review and approve the arrangement before it goes to BNM.
+  must_not_say: []
+  tags: [faq]
+  reviewed: true
+
+- id: g34
+  question: Does a standard e-money issuer have to join the shared payment infrastructure for account-to-account transfers?
+  lang: en
+  firm: [standard_emi]
+  coverage: answered
+  expected: [iftf_pd:9.2, iftf_pd:2.2]
+  also_ok: [iftf_pd:9.6]
+  must_say:
+    - The obligation in 9.2 is on banking institutions and eligible e-money issuers.
+    - A standard e-money issuer is not named there.
+  must_not_say:
+    - Standard e-money issuers must participate.
+  tags: [applicability]
+  reviewed: true
+
+- id: g35
+  question: Do we need BNM's approval to outsource our customer service to another company?
+  lang: en
+  firm: [standard_emi]
+  coverage: answered
+  expected: [emoney_pd:18.4]
+  also_ok: [emoney_pd:18.5, emoney_pd:18.12]
+  must_say:
+    - A material outsourcing arrangement (or a material change to one) is approved by the board
+      and then submitted to BNM for approval (e-Money policy document 18.4).
+  must_not_say:
+    - This is not covered.
+  tags: []
+  reviewed: true
+
+- id: g36
+  question: What is the maximum interchange fee on debit card transactions?
+  lang: en
+  firm: [nonbank_acquirer]
+  coverage: not_covered
+  expected: []
+  also_ok: [merchant-acq_pd:6.1, techreq-psr_pd:6.1]
+  must_say:
+    - Interchange fees are not in the indexed documents.
+  must_not_say:
+    - Any interchange fee figure.
+  pointer: Policy Document on Payment Card Reform Framework / Policy Document on Debit Card and Debit Card-i
+  tags: [out-of-corpus]
+  reviewed: true
+
+- id: g37
+  question: What are BNM's business continuity planning requirements for us?
+  lang: en
+  firm: [standard_emi]
+  coverage: partial
+  expected: [emoney_pd:17.1, emoney_pd:17.4]
+  also_ok: [emoney_pd:6.1]
+  must_say:
+    - The e-Money policy document's section 17 sets business continuity requirements for EMIs
+      (e.g. maximum tolerable downtime and recovery time objectives per critical function).
+    - BNM's separate Business Continuity Management policy document is not indexed.
+  must_not_say: []
+  pointer: Policy Document on Business Continuity Management
+  tags: [out-of-corpus]
+  reviewed: true
+
+# --- The draft trap ---------------------------------------------------------------------------
+
+- id: g38
+  question: Our bank has over a million individual customers. What data must we share through open finance by 1 January 2027?
+  lang: en
+  firm: [licensed_bank]
+  coverage: answered
+  expected: [open-finance_ed:Appendix 2 / 2, open-finance_ed:Appendix 2 / 1]
+  also_ok: [open-finance_ed:Appendix 1 / 2, open-finance_ed:4.1, open-finance_ed:preface]
+  must_say:
+    - This is an exposure draft; nothing here is in force.
+    - The draft proposes account and transaction information of deposit, e-money, charge card
+      and credit card accounts for individual customers by 1 January 2027.
+  must_not_say:
+    - The bank must share this data by 1 January 2027 (as a binding rule).
+  tags: [draft, date]
+  reviewed: true
+
+# --- Questions in Malay (answers in English) ---------------------------------------------------
+
+- id: g39
+  question: Bilakah dasar Keperluan Teknologi untuk Penerima Kawal Selia Perkhidmatan Pembayaran berkuat kuasa?
+  lang: ms
+  firm: [standard_emi]
+  coverage: answered
+  expected: [techreq-psr_pd:4.1]
+  also_ok: [techreq-psr_pd:2.1, techreq-psr_pd:2.4]
+  must_say:
+    - 12 March 2027, one year after it was issued on 12 March 2026.
+  must_not_say:
+    - It is already in force.
+  tags: [malay, date]
+  reviewed: true
+
+- id: g40
+  question: Adakah Kewangan Terbuka (Open Finance) sudah menjadi peraturan BNM?
+  lang: ms
+  firm: []
+  coverage: answered
+  expected: [open-finance_ed:preface]
+  also_ok: [open-finance_ed:4.1, open-finance_ed:2.1]
+  must_say:
+    - No. It is an exposure draft (a proposal) that asked for feedback by 1 March 2026; the
+      indexed documents have no final policy.
+  must_not_say:
+    - It is in force, or it comes into force on 1 January 2027.
+  tags: [malay, draft]
+  reviewed: true
+
+- id: g41
+  question: Berapa lama syarikat kami ada untuk menyelesaikan aduan yang mudah?
+  lang: ms
+  firm: [eligible_emi]
+  coverage: answered
+  expected: [complaints_pd:11.5]
+  also_ok: [complaints_pd:Appendix II, complaints_pd:11.6]
+  must_say:
+    - Five working days from receiving the complaint.
+  must_not_say: []
+  tags: [malay, threshold]
+  reviewed: true
+
+- id: g42
+  question: Perlukah kami kelulusan BNM untuk menaikkan had dompet e-wang kepada RM5,000?
+  lang: ms
+  firm: [standard_emi]
+  coverage: answered
+  expected: [emoney_pd:20.8]
+  also_ok: [emoney_pd:20.9, emoney_faq:Q6]
+  must_say:
+    - Yes, prior written approval for a wallet limit of RM5,000 or more.
+  must_not_say: []
+  tags: [malay, threshold]
+  reviewed: true
+
+# --- Supersession and status edge cases --------------------------------------------------------
+
+- id: g43
+  question: Does the e-Money policy document's technology section still apply after the Technology Requirements come in?
+  lang: en
+  firm: [standard_emi]
+  coverage: answered
+  expected: [techreq-psr_pd:7.1]
+  also_ok: [techreq-psr_pd:4.1, emoney_pd:27.1]
+  must_say:
+    - No. Technology Requirements 7.1 supersedes paragraphs 27 to 31 of the e-Money policy
+      document, from 12 March 2027.
+  must_not_say: []
+  tags: [superseded, date]
+  reviewed: true
+
+- id: g44
+  question: Do approved payment system operators have to follow the Technology Requirements?
+  lang: en
+  firm: [payment_system_operator]
+  coverage: answered
+  expected: [techreq-psr_pd:2.3]
+  also_ok: [techreq-psr_pd:5.2, pso_pd:18.1]
+  must_say:
+    - No. Approved operators of payment systems regulated under the Payment System Operator
+      policy document (not operating a designated payment system) are excluded.
+    - Their technology requirements stay in the Payment System Operator policy document.
+  must_not_say: []
+  tags: [applicability]
+  reviewed: true

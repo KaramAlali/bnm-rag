@@ -105,6 +105,7 @@ part, section, para_no ("8.1", "Appendix 5 / 3.2"), heading_path,
 obligation (S | G | none), text, footnotes[], figure (text includes a hand transcription),
 page_start, page_end, source_url,
 effective_from (date | "pending: <event>"; None for FAQs and feedback statements),
+effective_until (date it was superseded, e.g. e-Money PD 27-31 on 12 March 2027),
 effective_exceptions [{from, items, who, source}] (later dates for some sub-items or firms),
 effective_note, applies_to [roles from applicability.yaml], applies_note,
 para_refs, faq_links [FAQ chunk_ids] (on paragraphs), refers_to [chunk_ids] (on FAQs)
@@ -160,6 +161,10 @@ the model (the Aina/Kedai Rumah validation pattern).
    documents/paragraphs, must-say and must-not-say facts, expected coverage. Includes the
    draft trap, the RMiT-vs-Tech-Requirements split, threshold questions and out-of-corpus ones.
    Every expected answer checked against the PDF by a person. *Check:* reviewed by Karam.
+   *Drafted 2026-11-07:* 44 questions, `as_of` 2026-11-07, with `firm` roles, `expected` and
+   `also_ok` chunk_ids, `must_say` / `must_not_say`, `pointer` for partial and not-covered;
+   `tests/test_golden.py` checks the format and that every chunk_id exists. Each question has
+   `reviewed: false` until Karam checks it. *Done:* all 44 reviewed by Karam, 2026-11-07.
 4. **Index.** Create the Azure AI Search index (Free tier), embed and upload. Compare keyword,
    vector and hybrid on the golden set (recall@5 of expected paragraphs). *Check:* index size
    under the Free limit; recall numbers recorded in `docs/03-retrieval-results.md`.

@@ -25,7 +25,7 @@ def test_every_exception_quote_is_in_its_source_paragraph(enriched):
     """effective_dates.yaml cannot drift from the PDF text."""
     chunks, _ = enriched
     for e in load_exceptions():
-        source = chunks[f"{e['doc_id']}:{e['source']}"]
+        source = chunks[f"{e.get('source_doc', e['doc_id'])}:{e['source']}"]
         assert flat(e["quote"]) in flat(source["text"]), e
 
 
@@ -94,6 +94,23 @@ def test_complaints_12_1_to_12_4_started_first(enriched):
     for n in ("12.1", "12.2", "12.3", "12.4"):
         assert chunks[f"complaints_pd:{n}"]["effective_from"] == "2025-03-28"
     assert chunks["complaints_pd:11.5"]["effective_from"] == "2026-04-01"
+
+
+def test_tech_requirements_supersedes_older_tech_sections(enriched):
+    """Until 12 March 2027 an e-wallet's tech rules are e-Money PD 27-31; then Tech
+    Requirements (7.1). Merchant Acquiring 22 has no IT rules and stays."""
+    chunks, _ = enriched
+    for cid in ("emoney_pd:27.1", "emoney_pd:31.1", "merchant-acq_pd:17.1", "merchant-acq_pd:21.3"):
+        c = chunks[cid]
+        assert c["effective_until"] == "2027-03-12", cid
+        assert status(c, TODAY) == "in force"
+        assert status(c, dt.date(2027, 3, 12)) == "superseded"
+    for cid in ("emoney_pd:26.1", "emoney_pd:32.1", "merchant-acq_pd:22.1", "pso_pd:18.1"):
+        assert chunks[cid]["effective_until"] is None, cid
+    pso = chunks["pso_pd:19.1"]["effective_exceptions"]
+    assert [(e["who"], e["until"]) for e in pso] == [
+        ("operators of a designated payment system", "2027-03-12")]
+    assert chunks["techreq-psr_pd:2.4"]["effective_until"] is None
 
 
 def test_open_finance_is_always_proposed(enriched):

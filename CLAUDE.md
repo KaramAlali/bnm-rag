@@ -32,8 +32,9 @@ When the user says "continue" (or anything like it):
 
 - **Never present an exposure draft as a rule.** `open-finance_ed` is a proposal. Answers say
   "proposed", even though the draft states an effective date.
-- **Status is computed, never stored.** `in force` / `not yet in force` / `proposed` comes from
-  `kind` + `effective_from` against today's date at answer time. Effective dates can differ by
+- **Status is computed, never stored.** `in force` / `not yet in force` / `proposed` /
+  `superseded` comes from `kind` + `effective_from` / `effective_until` against today's date at
+  answer time. Effective dates can differ by
   paragraph (RMiT 10.31, IFTF Appendix II, Merchant Acquiring, Complaints Handling 12.1–12.4),
   RMiT Appendix 12 waits for NACSA's endorsement, and Tech Requirements' date is computed (one
   year after 12 March 2026). `bnm_rag.metadata.status` computes it.
