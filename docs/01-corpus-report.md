@@ -76,6 +76,11 @@ Each finding ends with the decision it leads to.
    - **Open Finance is an exposure draft** that says it "comes into effect on 1 January 2027". A
      naive bot would repeat that as a rule. Its feedback closed on 1 March 2026; no final policy
      yet.
+   - Found in step 2: RMiT 10.35(e) starts 15 October 2027; RMiT **Appendix 12** (the NCII Code
+     of Practice) "comes into effect upon endorsement by the CE of NACSA", so it is pending
+     (its 2.2 keeps main-body requirements on the main body's date); IFTF Appendix II gives
+     9.3, 9.4, 9.8, 9.11 the Nexus date and 9.7(b), 9.12(b) 30 June 2028; Open Finance staggers
+     paragraph 8.4 by firm size (2027, 2028, 2029) and 8.6 from 2028.
    → Per-chunk `effective_from` (a date, or `pending: <event>`) and `kind`. Status
    (`in force` / `not yet in force` / `proposed`) is computed at question time against today's
    date, never stored.
@@ -111,6 +116,13 @@ Each finding ends with the decision it leads to.
    references by number.
    → An "out of corpus" list built from section 6, so the agent can answer "that's in the
    Outsourcing policy document, which isn't indexed yet" instead of guessing.
+   Step 2 result: 136 references, 46 distinct documents outside the corpus
+   (`corpus/related_docs.json`). The same document appears under several names ("Dear CEOs
+   Letter on…", "Notification on…", "Specifications on…"; AML/CFT was renamed), so names are
+   normalised before grouping. RMiT 7.1 superseded the 2022 e-banking fraud letters and the
+   Fraud Detection Standard; IFTF and Open Finance still cite them, so those references point to
+   `rmit_pd`. Not in any section 6: the Securities Commission (crypto), which the agent will need
+   as a hand-written pointer in step 5.
 
 10. **Layout quirks found while parsing (step 1).** Each one is handled in `src/bnm_rag/parse/`
     and has a test.

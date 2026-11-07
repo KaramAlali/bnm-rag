@@ -1,0 +1,98 @@
+# Effective-date exceptions (corpus report finding 3).
+#
+# Each policy document's default date is parsed from its paragraph 4.1 (src/bnm_rag/metadata/
+# dates.py); Tech Requirements' "one (1) year after the date of its issuance" is computed from
+# the issue date in corpus/sources.csv. This file lists only the paragraphs that start on a
+# different date. Each entry gives:
+#   doc_id, paras    which paragraphs (selectors: "12.1-12.4", "9.3", "16" for all of 16.x,
+#                    "Appendix 12" for a whole appendix)
+#   from             an ISO date, or "pending: <event>" when no date is set yet
+#   items            only these sub-items of the paragraph move (the rest keep the default)
+#   who              only these firms get the different date (others keep the default)
+#   source, quote    the paragraph that sets the date and words copied from it; a test checks
+#                    the quote appears in that chunk, so this file cannot drift from the PDF
+#
+# Status (in force / not yet in force / proposed) is never stored: it is computed from `kind`
+# and these dates at answer time (src/bnm_rag/metadata/status.py).
+
+- doc_id: rmit_pd
+  paras: ["10.31"]
+  items: "(a), (c)"
+  from: 2027-09-30
+  source: "10.31"
+  quote: "establish stand-in processing arrangement by 30 September 2027"
+
+- doc_id: rmit_pd
+  paras: ["10.35"]
+  items: "(e)"
+  from: 2027-10-15
+  source: "10.35"
+  quote: "beginning from 15 October 2027"
+
+- doc_id: rmit_pd
+  paras: ["Appendix 12"]
+  from: "pending: endorsement of the Code of Practice by the Chief Executive of NACSA"
+  source: "Appendix 12 / 2.1"
+  quote: "comes into effect upon endorsement by the CE of NACSA"
+  note: >-
+    Appendix 12 / 2.2: requirements also in the main body keep the main body's date.
+
+- doc_id: iftf_pd
+  paras: ["9.3", "9.4", "9.8", "9.11"]
+  from: >-
+    pending: live operationalisation of cross-border A2A and QR payments under the Nexus
+    scheme (date to be announced by BNM)
+  source: "Appendix II"
+  quote: "live operationalisation date for cross-border A2A and purchase transactions"
+
+- doc_id: iftf_pd
+  paras: ["9.7", "9.12"]
+  items: "(b)"
+  from: 2028-06-30
+  source: "Appendix II"
+  quote: "Paragraphs 9.7(b), 9.12(b) | By 30 June 2028"
+
+- doc_id: merchant-acq_pd
+  paras: ["17.1-21.3"]
+  who: non-bank acquirers
+  from: 2022-09-15
+  source: "4.2"
+  quote: "paragraphs 17.1 to 21.3 come into effect on 15 September 2022"
+
+- doc_id: merchant-acq_pd
+  paras: ["9.1-9.3"]
+  who: non-bank acquirers
+  from: 2023-09-15
+  source: "4.2"
+  quote: "paragraphs 9.1 to 9.3 come into effect on 15 September 2023"
+
+- doc_id: complaints_pd
+  paras: ["12.1-12.4"]
+  from: 2025-03-28
+  source: "4.1"
+  quote: "except for paragraphs 12.1 to 12.4, which shall come into immediate effect on 28 March 2025"
+
+# Open Finance is an exposure draft: whatever these dates say, its status is "proposed".
+- doc_id: open-finance_ed
+  paras: ["8.4"]
+  who: >-
+    licensed banks and Islamic banks with more than 100,000 individual and SME customers
+    (but not more than one million individual customers)
+  from: 2028-01-01
+  source: "Appendix 2 / 1"
+  quote: "By 1 January 2028 | A licensed bank, or a licensed Islamic bank"
+
+- doc_id: open-finance_ed
+  paras: ["8.4"]
+  who: >-
+    prescribed DFIs with more than 100,000 individual and SME customers; eligible EMIs with a
+    network-based e-money solution and more than five million active users
+  from: 2029-01-01
+  source: "Appendix 2 / 1"
+  quote: "By 1 January 2029 | A prescribed development finance institution"
+
+- doc_id: open-finance_ed
+  paras: ["8.6"]
+  from: 2028-01-01
+  source: "9.2"
+  quote: "by 1 January 2028 or the date on which the FSP’s obligations under paragraph 8.4 commence, whichever is later"

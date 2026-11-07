@@ -1,0 +1,1886 @@
+{
+  "links": [
+    {
+      "doc_id": "techreq-psr_pd",
+      "para_no": "6.1",
+      "item": "a",
+      "relation": "related",
+      "title": "Policy Document on Electronic Money (E-Money)",
+      "issued": "2025-01-31",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": "emoney_pd"
+    },
+    {
+      "doc_id": "techreq-psr_pd",
+      "para_no": "6.1",
+      "item": "b",
+      "relation": "related",
+      "title": "Policy Document on Merchant Acquiring Services",
+      "issued": "2021-09-15",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": "merchant-acq_pd"
+    },
+    {
+      "doc_id": "techreq-psr_pd",
+      "para_no": "6.1",
+      "item": "c",
+      "relation": "related",
+      "title": "Policy Document on Governance, Risk Management, and Operations for Money Services Business (MSB)",
+      "issued": "2025-04-09",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "techreq-psr_pd",
+      "para_no": "6.1",
+      "item": "d",
+      "relation": "related",
+      "title": "Policy Document on Interoperable Credit Transfer Framework",
+      "issued": "2019-12-23",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": "iftf_pd"
+    },
+    {
+      "doc_id": "techreq-psr_pd",
+      "para_no": "6.1",
+      "item": "e",
+      "relation": "related",
+      "title": "Management of Customer Information and Permitted Disclosures (MCIPD)",
+      "issued": "2025-10-31",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": "mcipd_pd"
+    },
+    {
+      "doc_id": "techreq-psr_pd",
+      "para_no": "6.1",
+      "item": "f",
+      "relation": "related",
+      "title": "Policy Document on Fair Treatment of Financial Consumers",
+      "issued": "2024-03-27",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "techreq-psr_pd",
+      "para_no": "6.1",
+      "item": "g",
+      "relation": "related",
+      "title": "Guideline on Complaints Handling",
+      "issued": "2025-03-28",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": "complaints_pd"
+    },
+    {
+      "doc_id": "techreq-psr_pd",
+      "para_no": "6.1",
+      "item": "h",
+      "relation": "related",
+      "title": "Guidelines on Product Transparency and Disclosure",
+      "issued": "2024-12-03",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "techreq-psr_pd",
+      "para_no": "6.1",
+      "item": "i",
+      "relation": "related",
+      "title": "Policy Document on Risk-Based Authentication for Online Payment Card Transaction",
+      "issued": "2020-11-04",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "techreq-psr_pd",
+      "para_no": "6.1",
+      "item": "j",
+      "relation": "related",
+      "title": "Policy Document on Payment Card Reform Framework",
+      "issued": "2022-08-19",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "techreq-psr_pd",
+      "para_no": "6.1",
+      "item": "k",
+      "relation": "related",
+      "title": "Policy Document on Payment System Operator",
+      "issued": "2022-12-22",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": "pso_pd"
+    },
+    {
+      "doc_id": "techreq-psr_pd",
+      "para_no": "7.1",
+      "item": "a",
+      "relation": "superseded",
+      "title": "Policy Document on Governance, Risk Management, and Operations for Money Services Business (MSB)",
+      "issued": null,
+      "reference": null,
+      "paragraphs": "30 to 34",
+      "in_corpus": null
+    },
+    {
+      "doc_id": "techreq-psr_pd",
+      "para_no": "7.1",
+      "item": "b",
+      "relation": "superseded",
+      "title": "Policy Document on Electronic Money (E-Money)",
+      "issued": null,
+      "reference": null,
+      "paragraphs": "27 to 31",
+      "in_corpus": "emoney_pd"
+    },
+    {
+      "doc_id": "techreq-psr_pd",
+      "para_no": "7.1",
+      "item": "c",
+      "relation": "superseded",
+      "title": "Policy Document on Merchant Acquiring Services",
+      "issued": null,
+      "reference": null,
+      "paragraphs": "17 to 22",
+      "in_corpus": "merchant-acq_pd"
+    },
+    {
+      "doc_id": "techreq-psr_pd",
+      "para_no": "7.1",
+      "item": "d",
+      "relation": "superseded",
+      "title": "Policy Document on Payment System Operator",
+      "issued": null,
+      "reference": null,
+      "paragraphs": "18 to 19",
+      "in_corpus": "pso_pd"
+    },
+    {
+      "doc_id": "rmit_pd",
+      "para_no": "6.1",
+      "item": "a",
+      "relation": "related",
+      "title": "Guidelines on Data Management and MIS Framework",
+      "issued": "2008-10-23",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "rmit_pd",
+      "para_no": "6.1",
+      "item": "b",
+      "relation": "related",
+      "title": "Guidelines on Data Management and MIS Framework for Development Financial Institutions",
+      "issued": "2012-11-05",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "rmit_pd",
+      "para_no": "6.1",
+      "item": "c",
+      "relation": "related",
+      "title": "Policy Document on Risk Governance",
+      "issued": "2013-03-01",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "rmit_pd",
+      "para_no": "6.1",
+      "item": "d",
+      "relation": "related",
+      "title": "Policy Document on Introduction of New Products",
+      "issued": "2014-03-07",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "rmit_pd",
+      "para_no": "6.1",
+      "item": "e",
+      "relation": "related",
+      "title": "Policy Document on Compliance",
+      "issued": "2016-05-10",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "rmit_pd",
+      "para_no": "6.1",
+      "item": "f",
+      "relation": "related",
+      "title": "Policy Document on Operational Risk",
+      "issued": "2016-05-10",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "rmit_pd",
+      "para_no": "6.1",
+      "item": "g",
+      "relation": "related",
+      "title": "Policy Document on Outsourcing",
+      "issued": "2019-10-23",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "rmit_pd",
+      "para_no": "6.1",
+      "item": "h",
+      "relation": "related",
+      "title": "Policy Document on Interoperable Credit Transfer Framework",
+      "issued": "2019-12-23",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": "iftf_pd"
+    },
+    {
+      "doc_id": "rmit_pd",
+      "para_no": "6.1",
+      "item": "i",
+      "relation": "related",
+      "title": "Policy Document on Merchant Acquiring Services",
+      "issued": "2021-09-15",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": "merchant-acq_pd"
+    },
+    {
+      "doc_id": "rmit_pd",
+      "para_no": "6.1",
+      "item": "j",
+      "relation": "related",
+      "title": "Policy Document on Business Continuity Management",
+      "issued": "2022-12-19",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "rmit_pd",
+      "para_no": "6.1",
+      "item": "k",
+      "relation": "related",
+      "title": "Policy Document on Responsibility Mapping",
+      "issued": "2023-12-29",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "rmit_pd",
+      "para_no": "6.1",
+      "item": "l",
+      "relation": "related",
+      "title": "Industry letter on Updated 2023 Financial Stability Board Cyber Lexicon",
+      "issued": "2024-02-28",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "rmit_pd",
+      "para_no": "6.1",
+      "item": "m",
+      "relation": "related",
+      "title": "Policy Document on Fair Treatment of Financial Consumers",
+      "issued": "2024-03-27",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "rmit_pd",
+      "para_no": "6.1",
+      "item": "n",
+      "relation": "related",
+      "title": "Specifications on Countermeasures to Combat E-Money Fraud",
+      "issued": "2024-04-08",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "rmit_pd",
+      "para_no": "6.1",
+      "item": "o",
+      "relation": "related",
+      "title": "Policy Document on Operational Risk Reporting",
+      "issued": "2025-04-10",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "rmit_pd",
+      "para_no": "6.1",
+      "item": "p",
+      "relation": "related",
+      "title": "Management of Customer Information and Permitted Disclosures (MCIPD)",
+      "issued": "2025-10-31",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": "mcipd_pd"
+    },
+    {
+      "doc_id": "rmit_pd",
+      "para_no": "6.1",
+      "item": "q",
+      "relation": "related",
+      "title": "Policy Document on Debit Card and Debit Card-i",
+      "issued": "2025-12-19",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "rmit_pd",
+      "para_no": "6.1",
+      "item": "r",
+      "relation": "related",
+      "title": "Policy Document on Credit Card and Credit Card-i",
+      "issued": "2025-12-19",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "rmit_pd",
+      "para_no": "6.1",
+      "item": "s",
+      "relation": "related",
+      "title": "Circular of Notification on Consolidated List of Requirements Relating to Technology and Cyber Risk",
+      "issued": "2026-09-22",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "rmit_pd",
+      "para_no": "7.1",
+      "item": "a",
+      "relation": "superseded",
+      "title": "Guidelines on the Provision of Electronic Banking (e-banking) Services by Financial Institutions, including for the provisions under paragraphs 21, 22 and 26",
+      "issued": "2019-11-18",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": "rmit_pd"
+    },
+    {
+      "doc_id": "rmit_pd",
+      "para_no": "7.1",
+      "item": "b",
+      "relation": "superseded",
+      "title": "Specifications on Measures to Combat Electronic Banking Fraud",
+      "issued": "2022-08-23",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": "rmit_pd"
+    },
+    {
+      "doc_id": "rmit_pd",
+      "para_no": "7.1",
+      "item": "c",
+      "relation": "superseded",
+      "title": "Measures to Combat Fraud Monetised via Internet Banking and Mobile Banking",
+      "issued": "2022-05-31",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": "rmit_pd"
+    },
+    {
+      "doc_id": "rmit_pd",
+      "para_no": "7.1",
+      "item": "d",
+      "relation": "superseded",
+      "title": "Policy Document on Risk Management in Technology (RMiT)",
+      "issued": "2023-06-01",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": "rmit_pd"
+    },
+    {
+      "doc_id": "rmit_pd",
+      "para_no": "7.1",
+      "item": "e",
+      "relation": "superseded",
+      "title": "Additional Guidance on Technology and Cyber Safeguards to Ensure the Protection of Customer Information",
+      "issued": "2023-07-10",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": "rmit_pd"
+    },
+    {
+      "doc_id": "rmit_pd",
+      "para_no": "7.1",
+      "item": "f",
+      "relation": "superseded",
+      "title": "Specifications on Fraud Detection Standard",
+      "issued": "2024-03-27",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": "rmit_pd"
+    },
+    {
+      "doc_id": "emoney_pd",
+      "para_no": "6.1",
+      "item": "a",
+      "relation": "related",
+      "title": "Policy Document on Anti-Money Laundering, Counter Financing of Terrorism and Targeted Financial Sanctions for Financial Institutions (AML/CFT and TFS for FIs)",
+      "issued": null,
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "emoney_pd",
+      "para_no": "6.1",
+      "item": "b",
+      "relation": "related",
+      "title": "Guidelines on Complaints Handling",
+      "issued": null,
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": "complaints_pd"
+    },
+    {
+      "doc_id": "emoney_pd",
+      "para_no": "6.1",
+      "item": "c",
+      "relation": "related",
+      "title": "Policy Document on Fair Treatment of Financial Consumers",
+      "issued": null,
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "emoney_pd",
+      "para_no": "6.1",
+      "item": "d",
+      "relation": "related",
+      "title": "Policy Document on Fit and Proper Criteria for Approved Person",
+      "issued": null,
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "emoney_pd",
+      "para_no": "6.1",
+      "item": "e",
+      "relation": "related",
+      "title": "Guidelines on Product Transparency and Disclosure",
+      "issued": null,
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "emoney_pd",
+      "para_no": "6.1",
+      "item": "f",
+      "relation": "related",
+      "title": "Policy Document on Management of Customer Information and Permitted Disclosures",
+      "issued": null,
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": "mcipd_pd"
+    },
+    {
+      "doc_id": "emoney_pd",
+      "para_no": "6.1",
+      "item": "g",
+      "relation": "related",
+      "title": "Policy Document on Interoperable Credit Transfer Framework",
+      "issued": null,
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": "iftf_pd"
+    },
+    {
+      "doc_id": "emoney_pd",
+      "para_no": "6.1",
+      "item": "h",
+      "relation": "related",
+      "title": "Policy Document on Merchant Acquiring Services",
+      "issued": null,
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": "merchant-acq_pd"
+    },
+    {
+      "doc_id": "emoney_pd",
+      "para_no": "6.1",
+      "item": "i",
+      "relation": "related",
+      "title": "Policy Document on Risk-Based Authentication for Online Payment Card Transaction",
+      "issued": null,
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "emoney_pd",
+      "para_no": "6.1",
+      "item": "j",
+      "relation": "related",
+      "title": "Policy Document on Payment Cards Framework",
+      "issued": null,
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "emoney_pd",
+      "para_no": "6.1",
+      "item": "k",
+      "relation": "related",
+      "title": "Policy Document on Risk Management in Technology (RMiT)",
+      "issued": null,
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": "rmit_pd"
+    },
+    {
+      "doc_id": "emoney_pd",
+      "para_no": "6.1",
+      "item": "l",
+      "relation": "related",
+      "title": "Policy Document on Electronic Know-Your-Customer (e-KYC)",
+      "issued": null,
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": "ekyc_pd"
+    },
+    {
+      "doc_id": "emoney_pd",
+      "para_no": "6.1",
+      "item": "m",
+      "relation": "related",
+      "title": "Policy Document on Business Continuity Management",
+      "issued": null,
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "emoney_pd",
+      "para_no": "6.1",
+      "item": "n",
+      "relation": "related",
+      "title": "Policy Document on STATsmart Reporting Requirements on Data Submission for Reporting Entities",
+      "issued": null,
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "emoney_pd",
+      "para_no": "6.1",
+      "item": "o",
+      "relation": "related",
+      "title": "Policy Document on Wakalah",
+      "issued": null,
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "emoney_pd",
+      "para_no": "6.1",
+      "item": "p",
+      "relation": "related",
+      "title": "Policy Document on Wadi’ah",
+      "issued": null,
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "emoney_pd",
+      "para_no": "6.1",
+      "item": "q",
+      "relation": "related",
+      "title": "Policy Document on Qard",
+      "issued": null,
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "emoney_pd",
+      "para_no": "6.1",
+      "item": "r",
+      "relation": "related",
+      "title": "Shariah Advisory Council of Bank Negara Malaysia (SAC) Ruling on E-Money as a Shariah Compliant Payment Instrument",
+      "issued": null,
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "emoney_pd",
+      "para_no": "7.1",
+      "item": null,
+      "relation": "superseded",
+      "title": "Policy Document on Electronic Money (E-Money)",
+      "issued": "2022-12-30",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": "emoney_pd"
+    },
+    {
+      "doc_id": "ekyc_pd",
+      "para_no": "6.1",
+      "item": "i",
+      "relation": "related",
+      "title": "Anti-Money Laundering, Countering Financing of Terrorism, Countering Proliferation Financing and Targeted Financial Sanctions for Financial Institutions (AML/CFT/CPF and TFS for FIs) policy document",
+      "issued": "2024-02-05",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "ekyc_pd",
+      "para_no": "6.1",
+      "item": "ii",
+      "relation": "related",
+      "title": "Risk Management in Technology (RMiT)",
+      "issued": "2023-06-01",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": "rmit_pd"
+    },
+    {
+      "doc_id": "ekyc_pd",
+      "para_no": "6.1",
+      "item": "iii",
+      "relation": "related",
+      "title": "Outsourcing",
+      "issued": "2019-10-23",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "ekyc_pd",
+      "para_no": "6.1",
+      "item": "iv",
+      "relation": "related",
+      "title": "Management of Customer Information and Permitted Disclosures",
+      "issued": "2023-04-03",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": "mcipd_pd"
+    },
+    {
+      "doc_id": "ekyc_pd",
+      "para_no": "6.1",
+      "item": "v",
+      "relation": "related",
+      "title": "Introduction of New Products",
+      "issued": "2014-03-07",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "ekyc_pd",
+      "para_no": "6.1",
+      "item": "vi",
+      "relation": "related",
+      "title": "Introduction of New Products by Insurers and Takaful Operators",
+      "issued": "2015-05-15",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "ekyc_pd",
+      "para_no": "7.1",
+      "item": null,
+      "relation": "superseded",
+      "title": "Electronic Know-Your-Customer (e-KYC) policy document",
+      "issued": "2020-06-30",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": "ekyc_pd"
+    },
+    {
+      "doc_id": "pso_pd",
+      "para_no": "6.1",
+      "item": "a",
+      "relation": "related",
+      "title": "Business Continuity Management",
+      "issued": null,
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "pso_pd",
+      "para_no": "6.1",
+      "item": "b",
+      "relation": "related",
+      "title": "Fit and Proper Criteria for Approved Person",
+      "issued": null,
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "pso_pd",
+      "para_no": "6.1",
+      "item": "c",
+      "relation": "related",
+      "title": "Interoperable Credit Transfer Framework",
+      "issued": null,
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": "iftf_pd"
+    },
+    {
+      "doc_id": "pso_pd",
+      "para_no": "6.1",
+      "item": "d",
+      "relation": "related",
+      "title": "Management of Customer Information and Permitted Disclosures",
+      "issued": null,
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": "mcipd_pd"
+    },
+    {
+      "doc_id": "pso_pd",
+      "para_no": "6.1",
+      "item": "e",
+      "relation": "related",
+      "title": "Operational Risk Reporting",
+      "issued": null,
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "pso_pd",
+      "para_no": "6.1",
+      "item": "f",
+      "relation": "related",
+      "title": "Payment Cards Framework",
+      "issued": null,
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "pso_pd",
+      "para_no": "6.1",
+      "item": "g",
+      "relation": "related",
+      "title": "Risk Management in Technology (RMiT)",
+      "issued": null,
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": "rmit_pd"
+    },
+    {
+      "doc_id": "merchant-acq_pd",
+      "para_no": "6.1",
+      "item": "a",
+      "relation": "related",
+      "title": "Policy Document on Risk-Based Authentication for Online Payment Card Transaction",
+      "issued": null,
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "merchant-acq_pd",
+      "para_no": "6.1",
+      "item": "b",
+      "relation": "related",
+      "title": "Policy Document on Payment Card Reform Framework",
+      "issued": null,
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "merchant-acq_pd",
+      "para_no": "6.1",
+      "item": "c",
+      "relation": "related",
+      "title": "Policy Document on Management of Customer Information and Permitted Disclosures",
+      "issued": null,
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": "mcipd_pd"
+    },
+    {
+      "doc_id": "merchant-acq_pd",
+      "para_no": "6.1",
+      "item": "d",
+      "relation": "related",
+      "title": "Policy Document on Interoperable Credit Transfer Framework",
+      "issued": null,
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": "iftf_pd"
+    },
+    {
+      "doc_id": "merchant-acq_pd",
+      "para_no": "7.1",
+      "item": "a",
+      "relation": "superseded",
+      "title": "Policy Document on Credit Card",
+      "issued": "2019-07-02",
+      "reference": null,
+      "paragraphs": "33",
+      "in_corpus": null
+    },
+    {
+      "doc_id": "merchant-acq_pd",
+      "para_no": "7.1",
+      "item": "b",
+      "relation": "superseded",
+      "title": "Policy Document on Credit Card-i",
+      "issued": "2019-07-02",
+      "reference": null,
+      "paragraphs": "34",
+      "in_corpus": null
+    },
+    {
+      "doc_id": "merchant-acq_pd",
+      "para_no": "7.1",
+      "item": "c",
+      "relation": "superseded",
+      "title": "Policy Document on Debit Card",
+      "issued": "2016-12-02",
+      "reference": null,
+      "paragraphs": "23",
+      "in_corpus": null
+    },
+    {
+      "doc_id": "merchant-acq_pd",
+      "para_no": "7.1",
+      "item": "d",
+      "relation": "superseded",
+      "title": "Policy Document on Debit Card-i",
+      "issued": "2016-12-02",
+      "reference": null,
+      "paragraphs": "25",
+      "in_corpus": null
+    },
+    {
+      "doc_id": "merchant-acq_pd",
+      "para_no": "7.1",
+      "item": "e",
+      "relation": "superseded",
+      "title": "Policy Document on Charge Card",
+      "issued": "2016-12-02",
+      "reference": null,
+      "paragraphs": "30",
+      "in_corpus": null
+    },
+    {
+      "doc_id": "merchant-acq_pd",
+      "para_no": "7.1",
+      "item": "f",
+      "relation": "superseded",
+      "title": "Policy Document on Charge Card-i",
+      "issued": "2016-12-02",
+      "reference": null,
+      "paragraphs": "32",
+      "in_corpus": null
+    },
+    {
+      "doc_id": "iftf_pd",
+      "para_no": "6.1",
+      "item": "a",
+      "relation": "related",
+      "title": "Money Services Business Act 2011",
+      "issued": null,
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "iftf_pd",
+      "para_no": "6.1",
+      "item": "b",
+      "relation": "related",
+      "title": "Policy Document on Merchant Acquiring Services",
+      "issued": "2021-09-15",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": "merchant-acq_pd"
+    },
+    {
+      "doc_id": "iftf_pd",
+      "para_no": "6.1",
+      "item": "c",
+      "relation": "related",
+      "title": "Dear CEOs Letter on Measures to Combat Fraud Monetised via Internet Banking and Mobile Banking",
+      "issued": "2022-05-31",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": "rmit_pd"
+    },
+    {
+      "doc_id": "iftf_pd",
+      "para_no": "6.1",
+      "item": "d",
+      "relation": "related",
+      "title": "Dear CEOs Letter on Specifications on Measures to Combat Electronic Banking Fraud",
+      "issued": "2022-08-23",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": "rmit_pd"
+    },
+    {
+      "doc_id": "iftf_pd",
+      "para_no": "6.1",
+      "item": "e",
+      "relation": "related",
+      "title": "Policy Document on Payment System Operator",
+      "issued": "2022-12-22",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": "pso_pd"
+    },
+    {
+      "doc_id": "iftf_pd",
+      "para_no": "6.1",
+      "item": "f",
+      "relation": "related",
+      "title": "Policy Document on Anti-Money Laundering, Countering Financing of Terrorism, Countering Proliferation Financing and Targeted Financial Sanctions for Financial Institutions",
+      "issued": "2024-02-05",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "iftf_pd",
+      "para_no": "6.1",
+      "item": "g",
+      "relation": "related",
+      "title": "Policy Document on Fair Treatment of Financial Consumers",
+      "issued": "2024-03-27",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "iftf_pd",
+      "para_no": "6.1",
+      "item": "h",
+      "relation": "related",
+      "title": "Dear CEOs Letter on Specifications on Fraud Detection Standards to Combat Electronic Banking Fraud",
+      "issued": "2024-03-27",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": "rmit_pd"
+    },
+    {
+      "doc_id": "iftf_pd",
+      "para_no": "6.1",
+      "item": "i",
+      "relation": "related",
+      "title": "Dear CEOs Letter on Specifications on Countermeasures to Combat E-Money Fraud",
+      "issued": "2024-04-08",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "iftf_pd",
+      "para_no": "6.1",
+      "item": "j",
+      "relation": "related",
+      "title": "Policy Document on Ensuring Fair Treatment for Victims of Unauthorised e-Banking Transactions",
+      "issued": "2024-06-28",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "iftf_pd",
+      "para_no": "6.1",
+      "item": "k",
+      "relation": "related",
+      "title": "Policy Document on Electronic Money",
+      "issued": "2025-01-31",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": "emoney_pd"
+    },
+    {
+      "doc_id": "iftf_pd",
+      "para_no": "6.1",
+      "item": "l",
+      "relation": "related",
+      "title": "Policy Document on Risk Management in Technology (RMiT)",
+      "issued": "2025-11-28",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": "rmit_pd"
+    },
+    {
+      "doc_id": "iftf_pd",
+      "para_no": "6.1",
+      "item": "m",
+      "relation": "related",
+      "title": "Policy Document on Financial Institutions’ Response to Fraud",
+      "issued": "2026-06-30",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "iftf_pd",
+      "para_no": "7.1",
+      "item": "a",
+      "relation": "superseded",
+      "title": "Interoperable Credit Transfer Framework",
+      "issued": "2019-12-23",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": "iftf_pd"
+    },
+    {
+      "doc_id": "mcipd_pd",
+      "para_no": "6.1",
+      "item": "a",
+      "relation": "related",
+      "title": "Guidelines on Data Management and MIS Framework",
+      "issued": "2011-08-29",
+      "reference": "BNM/RH/GL 018-1",
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "mcipd_pd",
+      "para_no": "6.1",
+      "item": "b",
+      "relation": "related",
+      "title": "Guidelines on Data Management and MIS Framework for Development Financial Institutions",
+      "issued": "2012-11-05",
+      "reference": "BNM/RH/GL 005-15",
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "mcipd_pd",
+      "para_no": "6.1",
+      "item": "c",
+      "relation": "related",
+      "title": "Policy Document on Operational Risk",
+      "issued": "2016-05-10",
+      "reference": "BNM/RH/PD 028-15",
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "mcipd_pd",
+      "para_no": "6.1",
+      "item": "d",
+      "relation": "related",
+      "title": "Policy Document on Outsourcing",
+      "issued": "2019-10-23",
+      "reference": "BNM/RH/PD 028-93",
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "mcipd_pd",
+      "para_no": "6.1",
+      "item": "e",
+      "relation": "related",
+      "title": "Policy Document on Risk Management in Technology (RMiT)",
+      "issued": "2023-06-01",
+      "reference": "BNM/RH/PD 028-98",
+      "paragraphs": null,
+      "in_corpus": "rmit_pd"
+    },
+    {
+      "doc_id": "mcipd_pd",
+      "para_no": "6.1",
+      "item": "f",
+      "relation": "related",
+      "title": "Policy Document on Issuance of Operational Risk Reporting and Commencement of Operational Risk Reporting System",
+      "issued": "2025-04-10",
+      "reference": "BNM/RH/PD 028-128",
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "mcipd_pd",
+      "para_no": "6.1",
+      "item": "g",
+      "relation": "related",
+      "title": "Policy Document on Product Transparency and Disclosure",
+      "issued": "2024-12-02",
+      "reference": "BNM/RH/PD 028-136",
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "mcipd_pd",
+      "para_no": "6.1",
+      "item": "h",
+      "relation": "related",
+      "title": "Notifications on Disclosure of Customer Information for the National Fraud Portal",
+      "issued": null,
+      "reference": "BNM/RH/NT 028-222",
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "mcipd_pd",
+      "para_no": "6.2",
+      "item": null,
+      "relation": "related",
+      "title": "Personal Data Protection Act 2010",
+      "issued": null,
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "mcipd_pd",
+      "para_no": "7.1",
+      "item": "a",
+      "relation": "superseded",
+      "title": "Policy Document on Management of Customer Information and Permitted Disclosures",
+      "issued": "2023-04-03",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": "mcipd_pd"
+    },
+    {
+      "doc_id": "mcipd_pd",
+      "para_no": "7.1",
+      "item": "b",
+      "relation": "superseded",
+      "title": "BNM’s Letter on Disclosure of Customer Information to Lembaga Hasil Dalam Negeri",
+      "issued": "2022-02-18",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": "mcipd_pd"
+    },
+    {
+      "doc_id": "complaints_pd",
+      "para_no": "6.1",
+      "item": "a",
+      "relation": "related",
+      "title": "Policy Document on Fair Treatment of Financial Consumers",
+      "issued": "2024-03-27",
+      "reference": "BNM/RH/PD 028-103",
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "complaints_pd",
+      "para_no": "6.1",
+      "item": "b",
+      "relation": "related",
+      "title": "Policy Document on Product Transparency and Disclosure",
+      "issued": "2024-12-02",
+      "reference": "BNM/RH/PD 028-136",
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "complaints_pd",
+      "para_no": "6.1",
+      "item": "c",
+      "relation": "related",
+      "title": "Policy Document on Operational Risk Reporting",
+      "issued": "2024-02-15",
+      "reference": "BNM/RH/PD 029-65",
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "complaints_pd",
+      "para_no": "6.1",
+      "item": "d",
+      "relation": "related",
+      "title": "Policy Document on Reporting Requirements on Statistical Report of Complaints Statistics",
+      "issued": "2019-10-31",
+      "reference": "BNM/RH/PD 028-105",
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "complaints_pd",
+      "para_no": "6.1",
+      "item": "e",
+      "relation": "related",
+      "title": "Policy Document on Electronic Money (E-Money)",
+      "issued": "2025-01-31",
+      "reference": "BNM/RH/PD 029-57",
+      "paragraphs": null,
+      "in_corpus": "emoney_pd"
+    },
+    {
+      "doc_id": "complaints_pd",
+      "para_no": "6.1",
+      "item": "f",
+      "relation": "related",
+      "title": "Policy Document on Responsibility Mapping",
+      "issued": "2023-12-29",
+      "reference": "BNM/RH/PD 028-131",
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "complaints_pd",
+      "para_no": "6.1",
+      "item": "g",
+      "relation": "related",
+      "title": "Policy Document on Corporate Governance",
+      "issued": "2016-08-03",
+      "reference": "BNM/RH/PD 029-9",
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "complaints_pd",
+      "para_no": "6.1",
+      "item": "h",
+      "relation": "related",
+      "title": "Policy Document on Corporate Governance (applicable to prescribed development financial institutions)",
+      "issued": "2019-12-13",
+      "reference": "BNM/RH/PD 035-5",
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "complaints_pd",
+      "para_no": "6.1",
+      "item": "i",
+      "relation": "related",
+      "title": "Specification Letter on Ensuring Fair Treatment of Victims of Unauthorised e-Banking Transactions",
+      "issued": "2024-06-28",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "complaints_pd",
+      "para_no": "6.1",
+      "item": "j",
+      "relation": "related",
+      "title": "Specification Letter on Ensuring Proper Communication and Fair Redress in Managing Complaints on Unauthorised Fraudulent Transactions",
+      "issued": "2022-06-10",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "complaints_pd",
+      "para_no": "6.2",
+      "item": null,
+      "relation": "superseded",
+      "title": "Guidelines on Complaints Handling",
+      "issued": "2009-12-17",
+      "reference": "BNM/RH/GL 000-4",
+      "paragraphs": null,
+      "in_corpus": "complaints_pd"
+    },
+    {
+      "doc_id": "sandbox_pd",
+      "para_no": "4.2",
+      "item": null,
+      "relation": "superseded",
+      "title": "Policy Document on Financial Technology Regulatory Sandbox Framework",
+      "issued": "2016-10-18",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": "sandbox_pd"
+    },
+    {
+      "doc_id": "open-finance_ed",
+      "para_no": "6.1",
+      "item": "a",
+      "relation": "related",
+      "title": "Guidelines on Data Management and MIS Framework",
+      "issued": "2011-08-29",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "open-finance_ed",
+      "para_no": "6.1",
+      "item": "b",
+      "relation": "related",
+      "title": "Guidelines on Data Management and MIS Framework for Development Financial Institutions",
+      "issued": "2012-11-05",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "open-finance_ed",
+      "para_no": "6.1",
+      "item": "c",
+      "relation": "related",
+      "title": "Policy Document on Risk Governance",
+      "issued": "2013-03-01",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "open-finance_ed",
+      "para_no": "6.1",
+      "item": "d",
+      "relation": "related",
+      "title": "Policy Document on Operational Risk",
+      "issued": "2016-05-10",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "open-finance_ed",
+      "para_no": "6.1",
+      "item": "e",
+      "relation": "related",
+      "title": "Notification on Measures to Combat Fraud Monetised via Internet Banking and Mobile Banking",
+      "issued": "2022-05-31",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": "rmit_pd"
+    },
+    {
+      "doc_id": "open-finance_ed",
+      "para_no": "6.1",
+      "item": "f",
+      "relation": "related",
+      "title": "Notification on Specifications Relating to Measures to Combat Electronic Banking Fraud",
+      "issued": "2022-08-23",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": "rmit_pd"
+    },
+    {
+      "doc_id": "open-finance_ed",
+      "para_no": "6.1",
+      "item": "g",
+      "relation": "related",
+      "title": "Policy Document on Business Continuity Management",
+      "issued": "2022-12-19",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "open-finance_ed",
+      "para_no": "6.1",
+      "item": "h",
+      "relation": "related",
+      "title": "Policy Document on Risk Management in Technology",
+      "issued": "2023-06-01",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": "rmit_pd"
+    },
+    {
+      "doc_id": "open-finance_ed",
+      "para_no": "6.1",
+      "item": "i",
+      "relation": "related",
+      "title": "Notification on Specifications on Fraud Detection Standards to Combat Electronic Banking Fraud",
+      "issued": "2024-03-27",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": "rmit_pd"
+    },
+    {
+      "doc_id": "open-finance_ed",
+      "para_no": "6.1",
+      "item": "j",
+      "relation": "related",
+      "title": "Policy Document on Fair Treatment of Financial Consumers",
+      "issued": "2024-03-27",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "open-finance_ed",
+      "para_no": "6.1",
+      "item": "k",
+      "relation": "related",
+      "title": "Notification on Specifications on Countermeasures to Combat E-Money Fraud",
+      "issued": "2024-04-08",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "open-finance_ed",
+      "para_no": "6.1",
+      "item": "l",
+      "relation": "related",
+      "title": "Policy Document on Product Transparency and Disclosure",
+      "issued": "2024-12-02",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    },
+    {
+      "doc_id": "open-finance_ed",
+      "para_no": "6.1",
+      "item": "m",
+      "relation": "related",
+      "title": "Policy Document on Electronic Money (E-Money)",
+      "issued": "2025-01-31",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": "emoney_pd"
+    },
+    {
+      "doc_id": "open-finance_ed",
+      "para_no": "6.1",
+      "item": "n",
+      "relation": "related",
+      "title": "Policy Document on Complaints Handling",
+      "issued": "2025-03-28",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": "complaints_pd"
+    },
+    {
+      "doc_id": "open-finance_ed",
+      "para_no": "6.1",
+      "item": "o",
+      "relation": "related",
+      "title": "Policy Document on Management of Customer Information and Permitted Disclosures",
+      "issued": "2025-10-31",
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": "mcipd_pd"
+    },
+    {
+      "doc_id": "open-finance_ed",
+      "para_no": "6.2",
+      "item": null,
+      "relation": "related",
+      "title": "Personal Data Protection Act 2010",
+      "issued": null,
+      "reference": null,
+      "paragraphs": null,
+      "in_corpus": null
+    }
+  ],
+  "out_of_corpus": [
+    {
+      "title": "Anti-Money Laundering, Countering Financing of Terrorism, Countering Proliferation Financing and Targeted Financial Sanctions for Financial Institutions (AML/CFT/CPF and TFS for FIs) policy document",
+      "references": [],
+      "cited_by": [
+        "emoney_pd 6.1(a) related",
+        "ekyc_pd 6.1(i) related",
+        "iftf_pd 6.1(f) related"
+      ]
+    },
+    {
+      "title": "Circular of Notification on Consolidated List of Requirements Relating to Technology and Cyber Risk",
+      "references": [],
+      "cited_by": [
+        "rmit_pd 6.1(s) related"
+      ]
+    },
+    {
+      "title": "Dear CEOs Letter on Specifications on Countermeasures to Combat E-Money Fraud",
+      "references": [],
+      "cited_by": [
+        "rmit_pd 6.1(n) related",
+        "iftf_pd 6.1(i) related",
+        "open-finance_ed 6.1(k) related"
+      ]
+    },
+    {
+      "title": "Guidelines on Data Management and MIS Framework",
+      "references": [
+        "BNM/RH/GL 018-1"
+      ],
+      "cited_by": [
+        "rmit_pd 6.1(a) related",
+        "mcipd_pd 6.1(a) related",
+        "open-finance_ed 6.1(a) related"
+      ]
+    },
+    {
+      "title": "Guidelines on Data Management and MIS Framework for Development Financial Institutions",
+      "references": [
+        "BNM/RH/GL 005-15"
+      ],
+      "cited_by": [
+        "rmit_pd 6.1(b) related",
+        "mcipd_pd 6.1(b) related",
+        "open-finance_ed 6.1(b) related"
+      ]
+    },
+    {
+      "title": "Industry letter on Updated 2023 Financial Stability Board Cyber Lexicon",
+      "references": [],
+      "cited_by": [
+        "rmit_pd 6.1(l) related"
+      ]
+    },
+    {
+      "title": "Introduction of New Products by Insurers and Takaful Operators",
+      "references": [],
+      "cited_by": [
+        "ekyc_pd 6.1(vi) related"
+      ]
+    },
+    {
+      "title": "Money Services Business Act 2011",
+      "references": [],
+      "cited_by": [
+        "iftf_pd 6.1(a) related"
+      ]
+    },
+    {
+      "title": "Notifications on Disclosure of Customer Information for the National Fraud Portal",
+      "references": [
+        "BNM/RH/NT 028-222"
+      ],
+      "cited_by": [
+        "mcipd_pd 6.1(h) related"
+      ]
+    },
+    {
+      "title": "Personal Data Protection Act 2010",
+      "references": [],
+      "cited_by": [
+        "mcipd_pd 6.2 related",
+        "open-finance_ed 6.2 related"
+      ]
+    },
+    {
+      "title": "Policy Document on Business Continuity Management",
+      "references": [],
+      "cited_by": [
+        "rmit_pd 6.1(j) related",
+        "emoney_pd 6.1(m) related",
+        "pso_pd 6.1(a) related",
+        "open-finance_ed 6.1(g) related"
+      ]
+    },
+    {
+      "title": "Policy Document on Charge Card",
+      "references": [],
+      "cited_by": [
+        "merchant-acq_pd 7.1(e) superseded"
+      ]
+    },
+    {
+      "title": "Policy Document on Charge Card-i",
+      "references": [],
+      "cited_by": [
+        "merchant-acq_pd 7.1(f) superseded"
+      ]
+    },
+    {
+      "title": "Policy Document on Compliance",
+      "references": [],
+      "cited_by": [
+        "rmit_pd 6.1(e) related"
+      ]
+    },
+    {
+      "title": "Policy Document on Corporate Governance",
+      "references": [
+        "BNM/RH/PD 029-9"
+      ],
+      "cited_by": [
+        "complaints_pd 6.1(g) related"
+      ]
+    },
+    {
+      "title": "Policy Document on Corporate Governance (applicable to prescribed development financial institutions)",
+      "references": [
+        "BNM/RH/PD 035-5"
+      ],
+      "cited_by": [
+        "complaints_pd 6.1(h) related"
+      ]
+    },
+    {
+      "title": "Policy Document on Credit Card",
+      "references": [],
+      "cited_by": [
+        "merchant-acq_pd 7.1(a) superseded"
+      ]
+    },
+    {
+      "title": "Policy Document on Credit Card and Credit Card-i",
+      "references": [],
+      "cited_by": [
+        "rmit_pd 6.1(r) related"
+      ]
+    },
+    {
+      "title": "Policy Document on Credit Card-i",
+      "references": [],
+      "cited_by": [
+        "merchant-acq_pd 7.1(b) superseded"
+      ]
+    },
+    {
+      "title": "Policy Document on Debit Card",
+      "references": [],
+      "cited_by": [
+        "merchant-acq_pd 7.1(c) superseded"
+      ]
+    },
+    {
+      "title": "Policy Document on Debit Card and Debit Card-i",
+      "references": [],
+      "cited_by": [
+        "rmit_pd 6.1(q) related"
+      ]
+    },
+    {
+      "title": "Policy Document on Debit Card-i",
+      "references": [],
+      "cited_by": [
+        "merchant-acq_pd 7.1(d) superseded"
+      ]
+    },
+    {
+      "title": "Policy Document on Ensuring Fair Treatment for Victims of Unauthorised e-Banking Transactions",
+      "references": [],
+      "cited_by": [
+        "iftf_pd 6.1(j) related"
+      ]
+    },
+    {
+      "title": "Policy Document on Fair Treatment of Financial Consumers",
+      "references": [
+        "BNM/RH/PD 028-103"
+      ],
+      "cited_by": [
+        "techreq-psr_pd 6.1(f) related",
+        "rmit_pd 6.1(m) related",
+        "emoney_pd 6.1(c) related",
+        "iftf_pd 6.1(g) related",
+        "complaints_pd 6.1(a) related",
+        "open-finance_ed 6.1(j) related"
+      ]
+    },
+    {
+      "title": "Policy Document on Financial Institutions’ Response to Fraud",
+      "references": [],
+      "cited_by": [
+        "iftf_pd 6.1(m) related"
+      ]
+    },
+    {
+      "title": "Policy Document on Fit and Proper Criteria for Approved Person",
+      "references": [],
+      "cited_by": [
+        "emoney_pd 6.1(d) related",
+        "pso_pd 6.1(b) related"
+      ]
+    },
+    {
+      "title": "Policy Document on Governance, Risk Management, and Operations for Money Services Business (MSB)",
+      "references": [],
+      "cited_by": [
+        "techreq-psr_pd 6.1(c) related",
+        "techreq-psr_pd 7.1(a) superseded"
+      ]
+    },
+    {
+      "title": "Policy Document on Introduction of New Products",
+      "references": [],
+      "cited_by": [
+        "rmit_pd 6.1(d) related",
+        "ekyc_pd 6.1(v) related"
+      ]
+    },
+    {
+      "title": "Policy Document on Issuance of Operational Risk Reporting and Commencement of Operational Risk Reporting System",
+      "references": [
+        "BNM/RH/PD 028-128"
+      ],
+      "cited_by": [
+        "mcipd_pd 6.1(f) related"
+      ]
+    },
+    {
+      "title": "Policy Document on Operational Risk",
+      "references": [
+        "BNM/RH/PD 028-15"
+      ],
+      "cited_by": [
+        "rmit_pd 6.1(f) related",
+        "mcipd_pd 6.1(c) related",
+        "open-finance_ed 6.1(d) related"
+      ]
+    },
+    {
+      "title": "Policy Document on Operational Risk Reporting",
+      "references": [
+        "BNM/RH/PD 029-65"
+      ],
+      "cited_by": [
+        "rmit_pd 6.1(o) related",
+        "pso_pd 6.1(e) related",
+        "complaints_pd 6.1(c) related"
+      ]
+    },
+    {
+      "title": "Policy Document on Outsourcing",
+      "references": [
+        "BNM/RH/PD 028-93"
+      ],
+      "cited_by": [
+        "rmit_pd 6.1(g) related",
+        "ekyc_pd 6.1(iii) related",
+        "mcipd_pd 6.1(d) related"
+      ]
+    },
+    {
+      "title": "Policy Document on Payment Card Reform Framework",
+      "references": [],
+      "cited_by": [
+        "techreq-psr_pd 6.1(j) related",
+        "merchant-acq_pd 6.1(b) related"
+      ]
+    },
+    {
+      "title": "Policy Document on Payment Cards Framework",
+      "references": [],
+      "cited_by": [
+        "emoney_pd 6.1(j) related",
+        "pso_pd 6.1(f) related"
+      ]
+    },
+    {
+      "title": "Policy Document on Product Transparency and Disclosure",
+      "references": [
+        "BNM/RH/PD 028-136"
+      ],
+      "cited_by": [
+        "techreq-psr_pd 6.1(h) related",
+        "emoney_pd 6.1(e) related",
+        "mcipd_pd 6.1(g) related",
+        "complaints_pd 6.1(b) related",
+        "open-finance_ed 6.1(l) related"
+      ]
+    },
+    {
+      "title": "Policy Document on Qard",
+      "references": [],
+      "cited_by": [
+        "emoney_pd 6.1(q) related"
+      ]
+    },
+    {
+      "title": "Policy Document on Reporting Requirements on Statistical Report of Complaints Statistics",
+      "references": [
+        "BNM/RH/PD 028-105"
+      ],
+      "cited_by": [
+        "complaints_pd 6.1(d) related"
+      ]
+    },
+    {
+      "title": "Policy Document on Responsibility Mapping",
+      "references": [
+        "BNM/RH/PD 028-131"
+      ],
+      "cited_by": [
+        "rmit_pd 6.1(k) related",
+        "complaints_pd 6.1(f) related"
+      ]
+    },
+    {
+      "title": "Policy Document on Risk Governance",
+      "references": [],
+      "cited_by": [
+        "rmit_pd 6.1(c) related",
+        "open-finance_ed 6.1(c) related"
+      ]
+    },
+    {
+      "title": "Policy Document on Risk-Based Authentication for Online Payment Card Transaction",
+      "references": [],
+      "cited_by": [
+        "techreq-psr_pd 6.1(i) related",
+        "emoney_pd 6.1(i) related",
+        "merchant-acq_pd 6.1(a) related"
+      ]
+    },
+    {
+      "title": "Policy Document on STATsmart Reporting Requirements on Data Submission for Reporting Entities",
+      "references": [],
+      "cited_by": [
+        "emoney_pd 6.1(n) related"
+      ]
+    },
+    {
+      "title": "Policy Document on Wadi’ah",
+      "references": [],
+      "cited_by": [
+        "emoney_pd 6.1(p) related"
+      ]
+    },
+    {
+      "title": "Policy Document on Wakalah",
+      "references": [],
+      "cited_by": [
+        "emoney_pd 6.1(o) related"
+      ]
+    },
+    {
+      "title": "Shariah Advisory Council of Bank Negara Malaysia (SAC) Ruling on E-Money as a Shariah Compliant Payment Instrument",
+      "references": [],
+      "cited_by": [
+        "emoney_pd 6.1(r) related"
+      ]
+    },
+    {
+      "title": "Specification Letter on Ensuring Fair Treatment of Victims of Unauthorised e-Banking Transactions",
+      "references": [],
+      "cited_by": [
+        "complaints_pd 6.1(i) related"
+      ]
+    },
+    {
+      "title": "Specification Letter on Ensuring Proper Communication and Fair Redress in Managing Complaints on Unauthorised Fraudulent Transactions",
+      "references": [],
+      "cited_by": [
+        "complaints_pd 6.1(j) related"
+      ]
+    }
+  ]
+}

@@ -5,7 +5,7 @@
 # there before parsing. A figure's text is added to the chunk with the same para_no, or becomes
 # a chunk of its own. Chunks carrying a transcription have "figure": true.
 #
-# Checked against the PDF page by: (not yet; Karam to check)
+# Checked against the PDF page by: Karam, 2026-11-07
 
 - doc_id: open-finance_ed
   para_no: 1 / Diagram 1

@@ -99,14 +99,19 @@ Azure account also gets a 30-day $200 credit.
 ## The chunk (one record per paragraph)
 
 ```
-doc_id, version (reference + issue date + file hash), kind (policy_document | faq |
-feedback_statement | exposure_draft), reference, title,
+doc_id, version (reference@issued#file hash), kind (policy_document | faq |
+feedback_statement | exposure_draft), reference, title, issued, parent_doc (FAQs, feedback),
 part, section, para_no ("8.1", "Appendix 5 / 3.2"), heading_path,
 obligation (S | G | none), text, footnotes[], figure (text includes a hand transcription),
 page_start, page_end, source_url,
-effective_from (date | "pending: <event>"), applies_to [entity types],
-faq_links [para_no], related_docs [titles]
+effective_from (date | "pending: <event>"; None for FAQs and feedback statements),
+effective_exceptions [{from, items, who, source}] (later dates for some sub-items or firms),
+effective_note, applies_to [roles from applicability.yaml], applies_note,
+para_refs, faq_links [FAQ chunk_ids] (on paragraphs), refers_to [chunk_ids] (on FAQs)
 ```
+
+Related and superseded documents are per document, not per chunk: `corpus/related_docs.json`
+(`links` and `out_of_corpus`), committed so the app can load it without the PDFs.
 
 **Status is never stored.** `in force` / `not yet in force` / `proposed` is computed from
 `kind` and `effective_from` against today's date when a question is answered.
@@ -143,6 +148,14 @@ the model (the Aina/Kedai Rumah validation pattern).
    merge with `sources.csv`, curated `applicability.yaml` (the Tech Requirements tiers, IFTF
    Table 1), FAQ → paragraph links, the out-of-corpus list. *Check:* tests for every effective-date
    case in report finding 3.
+   *Done:* `src/bnm_rag/metadata/`, run inside `python -m bnm_rag.parse`. Document defaults are
+   parsed from 4.1; the 11 exceptions are hand-written in `corpus/curated/effective_dates.yaml`
+   (each with a quote a test checks against the chunk, so it cannot drift from the PDF) rather
+   than parsed, because they are phrased differently in each document and some sit in the body
+   (RMiT 10.31, 10.35, Appendix 12). Applicability is a role vocabulary (20 firm roles) in
+   `corpus/curated/applicability.yaml`; a firm holds one or more roles and each chunk gets
+   `applies_to`. `tech_requirements_tier()` answers "which tier am I". All 94 FAQ paragraph
+   references resolve (90 FAQ answers linked to 60 paragraphs). 46 documents are out of corpus.
 3. **Golden set, before retrieval.** ~40 questions in `evals/golden.yaml`: question, expected
    documents/paragraphs, must-say and must-not-say facts, expected coverage. Includes the
    draft trap, the RMiT-vs-Tech-Requirements split, threshold questions and out-of-corpus ones.

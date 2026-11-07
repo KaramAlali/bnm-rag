@@ -2,19 +2,23 @@
 
 ## Now
 
-- **Current step:** 2 — Metadata
-- **Next action:** write `src/bnm_rag/metadata/` that reads each policy document's Part A
-  chunks from `corpus/chunks.jsonl` (sections 4 Effective date, 6 Related documents, 7
-  Superseded) and produces per-chunk `effective_from` (date or `pending: <event>`), starting with
-  tests for every case in report finding 3 (Tech Requirements = issue + 1 year; RMiT 10.31;
-  IFTF 4.1 → Appendix II; Merchant Acquiring staggered; Complaints 12.1–12.4; Open Finance
-  proposed). Then `corpus/curated/applicability.yaml`, FAQ links (chunks already carry
-  `para_refs`), and the out-of-corpus list from section 6.
-- **Open questions for Karam:** check the 8 transcriptions in `corpus/curated/figures.yaml`
-  against the PDF pages listed there, then fill in its "Checked … by" line.
-- **Read for this step:** `docs/02-phase1-plan.md` → "Build steps", step 2, and "The chunk";
-  `docs/01-corpus-report.md` findings 3, 7, 8, 9. Run `uv run python -m bnm_rag.parse` first
-  (`chunks.jsonl` and `chunks.json` are git-ignored; the parser writes both).
+- **Current step:** 3 — Golden set
+- **Next action:** draft `evals/golden.yaml`, ~40 questions in the demo persona's voice
+  (compliance/tech lead at an e-wallet or payment gateway). Each: `question`, `expected`
+  chunk_ids, `must_say` / `must_not_say` facts, `coverage` (answered | partial | not_covered),
+  and the firm roles assumed (from `corpus/curated/applicability.yaml`). Cover: the four
+  "done" questions; the Open Finance draft trap; RMiT vs Tech Requirements (eligible vs standard
+  EMI, the RM800m e-wallet); each finding-3 date case (RMiT 10.31, Appendix 12 pending, IFTF
+  Nexus, Complaints 12.1–12.4); thresholds (tiers, 5% market share, RM50m card issuer); FAQ-backed
+  answers; out-of-corpus (AML/CFT, Outsourcing, crypto → Securities Commission); a few in Malay.
+  Add a test that every expected chunk_id exists in `chunks.jsonl`. Then Karam reviews each
+  expected answer against the PDF.
+- **Open questions for Karam:**
+  1. RMiT Appendix 12 is marked pending NACSA's endorsement. If you know it has been endorsed
+     (and from when), give the date and I'll set it.
+- **Read for this step:** `docs/02-phase1-plan.md` → "Who it's for", "What done means", step 3;
+  `corpus/curated/applicability.yaml` (roles); `corpus/related_docs.json` (out-of-corpus titles).
+  Run `uv run python -m bnm_rag.parse` first (chunks are git-ignored).
 
 ## Steps (Phase 1)
 
@@ -22,7 +26,7 @@ Details and the check for each step: `docs/02-phase1-plan.md` → "Build steps".
 
 - [x] 0. Repo setup
 - [x] 1. Parser (PDF → `corpus/chunks.jsonl`)
-- [ ] 2. Metadata (Part A, applicability YAML, FAQ links, out-of-corpus list)
+- [x] 2. Metadata (Part A, applicability YAML, FAQ links, out-of-corpus list)
 - [ ] 3. Golden set (`evals/golden.yaml`, reviewed by Karam)
 - [ ] 4. Index (Azure AI Search Free tier; retrieval comparison)
 - [ ] 5. Agent (tools, structured reply, citation validation)
@@ -33,6 +37,26 @@ Details and the check for each step: `docs/02-phase1-plan.md` → "Build steps".
 ## Log
 
 Newest first. One entry per work session: what was done, decisions, anything surprising.
+
+- 2026-11-07 — Step 2 metadata done: `src/bnm_rag/metadata/`, run inside
+  `python -m bnm_rag.parse`, so chunks gain `issued`, `version`, `effective_from`,
+  `effective_exceptions`, `effective_note`, `applies_to`, `applies_note`, `parent_doc`,
+  `faq_links`/`refers_to`. Karam checked the 8 figure transcriptions. Decisions: document dates
+  parsed from 4.1, the 11 exceptions hand-written in `corpus/curated/effective_dates.yaml` with
+  a quote per entry that a test checks against the chunk (they are worded differently in each
+  document and some sit in the body); exceptions for some sub-items or firms are listed, not
+  forced into one date; status computed in `metadata/status.py`. Applicability as 20 firm
+  roles (a firm can hold several) in `corpus/curated/applicability.yaml`, with RMiT 2.2, Tech
+  Requirements 2.2–2.6, IFTF's 2.2 table, Complaints 2.2–2.4 and MCIPD Part C as rules, plus
+  `tech_requirements_tier()`. `corpus/related_docs.json` is committed (titles only; the app
+  needs it without the PDFs). Surprises: RMiT Appendix 12 (NCII Code of Practice) is pending
+  NACSA endorsement; RMiT 10.35(e) starts 15 Oct 2027; RMiT superseded the e-banking fraud
+  letters that IFTF and Open Finance still cite; one document under up to 3 names. Corpus
+  fixture moved to `tests/conftest.py`. 90 tests pass. Karam confirmed Tech Requirements
+  2.4: Tier-2 if either the value or the volume threshold is exceeded (an "or"). Karam kept
+  the firm-type readings: MCIPD leaves out merchant acquirers, MSBs and designated payment
+  system operators (not in its FSP list); e-KYC keeps one insurer role with a "life and family
+  takaful only" note.
 
 - 2026-10-31 — Step 1 follow-up after Karam spotted Open Finance Diagram 1 missing and MCIPD
   13.2 at 15.6k chars. A check of every page line against the chunks found 7 figures that are

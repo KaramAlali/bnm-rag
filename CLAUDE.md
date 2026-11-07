@@ -35,7 +35,8 @@ When the user says "continue" (or anything like it):
 - **Status is computed, never stored.** `in force` / `not yet in force` / `proposed` comes from
   `kind` + `effective_from` against today's date at answer time. Effective dates can differ by
   paragraph (RMiT 10.31, IFTF Appendix II, Merchant Acquiring, Complaints Handling 12.1–12.4),
-  and Tech Requirements' date is computed (one year after 12 March 2026).
+  RMiT Appendix 12 waits for NACSA's endorsement, and Tech Requirements' date is computed (one
+  year after 12 March 2026). `bnm_rag.metadata.status` computes it.
 - **Every citation must come from that run's tool results.** A reply citing anything else is
   sent back to the model.
 - **RMiT vs Tech Requirements depends on the firm.** Tier-1 payment providers follow RMiT (plus
@@ -59,6 +60,12 @@ When the user says "continue" (or anything like it):
   the real PDFs skip when `corpus/raw/` is empty.
 - `corpus/curated/figures.yaml`: hand transcriptions of the 8 figures the parser cannot read
   (pictures, one scrambled diagram); merged into the chunks with `figure: true`.
+- Step 2 metadata (`src/bnm_rag/metadata/`) runs inside the same parse command:
+  `corpus/curated/effective_dates.yaml` (date exceptions, each with a quote a test checks
+  against the PDF text) and `corpus/curated/applicability.yaml` (roles, who each paragraph
+  applies to, the Tech Requirements tiers) are hand-written; `corpus/related_docs.json`
+  (related/superseded documents and the out-of-corpus list) is generated but **committed**,
+  because the app needs it where the PDFs are not available; a test fails if it is stale.
 - Licensing: index the documents, show short excerpts, always link to the source PDF. Never
   republish whole documents.
 

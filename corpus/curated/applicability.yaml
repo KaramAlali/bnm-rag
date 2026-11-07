@@ -1,0 +1,207 @@
+# Who each document and paragraph applies to (corpus report findings 5 and 7).
+#
+# Written by hand from each document's section 2 (Applicability) and the definitions in 5.2,
+# because the applicability tables extract with their columns mixed up. Tests in
+# tests/test_metadata.py pin the cases that matter (RMiT vs Tech Requirements, IFTF's table).
+#
+# A firm is described by one or more roles (a bank that also acquires merchants holds
+# licensed_bank and bank_acquirer). Roles marked "disjoint" never overlap their siblings: an
+# e-money issuer is either eligible_emi or standard_emi, never both.
+#
+# Per document: `roles` from section 2, then `table` (IFTF only) and `rules`, applied in order
+# to each chunk. Selectors: "all", "Part A", "12.3-12.9", "16" (every 16.x), "Appendix 10".
+# Ops: only (keep just these roles), remove, add, note (shown with the paragraph).
+# FAQs and feedback statements take their policy document's roles.
+
+roles:
+  licensed_bank: Licensed bank or licensed Islamic bank, including digital banks
+  investment_bank: Licensed investment bank
+  dfi: Prescribed development financial institution (DFIA)
+  insurer_takaful: Licensed insurer or licensed takaful operator
+  bank_emi: Bank or DFI that issues e-money (also holds licensed_bank or dfi)
+  eligible_emi: >-
+    Non-bank e-money issuer meeting e-Money PD Appendix 1 (500,000 active users for six months,
+    or a 5% market share by volume, value or outstanding e-money). Disjoint from standard_emi
+  standard_emi: Any other non-bank e-money issuer (e-wallet, prepaid). Disjoint from eligible_emi
+  nonbank_card_issuer: Approved non-bank issuer of credit or charge cards
+  bank_acquirer: Bank or DFI registered as a merchant acquirer (also holds licensed_bank or dfi)
+  nonbank_acquirer_major: >-
+    Non-bank registered merchant acquirer with at least 5% of non-bank merchant acquiring
+    value or volume in a year (RMiT 5.2(e)). Disjoint from nonbank_acquirer
+  nonbank_acquirer: Any other non-bank registered merchant acquirer
+  dps_operator: Operator of a designated payment system
+  shared_infra_operator: Approved operator of a payment system that runs a shared payment infrastructure
+  payment_system_operator: Any other approved operator of a payment system
+  iri_major: >-
+    Intermediary remittance institution with at least 5% of IRI value or volume in a year
+    (RMiT 5.2(f)). Disjoint from msb and msb_nondigital_fx
+  msb_nondigital_fx: >-
+    Money services business with no digital services, doing currency exchange or wholesale
+    currency only (Tech Requirements Tier-4). Disjoint from msb and iri_major
+  msb: Any other licensed money services business (remittance, digital currency exchange)
+  insurance_broker_adviser: Approved insurance or takaful broker, financial adviser or Islamic financial adviser
+  other_intermediary: Approved money broker or registered adjuster
+  fintech_company: Fintech company (not a financial institution) testing in the sandbox
+
+# Tech Requirements 2.4 and 2.5. Tier-1 is whoever RMiT covers (BNM notifies them; FAQ Q4).
+# 2.4: Tier-2 if EITHER the value or the volume threshold is exceeded (Tier-2's criteria are an
+# "or"), Tier-3 only if both are at or below it; confirmed by Karam on 2026-11-07. Values are per entity, summed across e-money, acquiring and remittance but not
+# currency exchange (footnote 3), set every January from the past calendar year (footnote 4),
+# and combined across group entities sharing technology (2.5).
+tech_requirements_tiers:
+  source: techreq-psr_pd 2.4
+  rmit_roles: [eligible_emi, nonbank_acquirer_major, iri_major, dps_operator]
+  tier4_roles: [msb_nondigital_fx]
+  value_threshold_rm: 1500000000
+  volume_threshold: 7000000
+
+documents:
+  rmit_pd:
+    source: "2.1, 2.2, 5.2"
+    roles: [licensed_bank, investment_bank, dfi, insurer_takaful, eligible_emi,
+            nonbank_acquirer_major, iri_major, dps_operator]
+    rules:
+      - paras: ["16", "17", "Appendix 6", "Appendix 7"]
+        remove: [dps_operator, eligible_emi, nonbank_acquirer_major, iri_major]
+        source: "2.2(a)"
+      - paras: ["12.3-12.9"]
+        remove: [dps_operator, iri_major]
+        source: "2.2(b)"
+      - paras: ["13.3"]
+        remove: [eligible_emi, nonbank_acquirer_major, iri_major]
+        note: >-
+          Also applies to eligible EMIs, non-bank merchant acquirers and IRIs that BNM has
+          designated as NCII entities (2.2(c)).
+      - paras: ["Appendix 12"]
+        note: >-
+          Applies only to NCII entities designated by BNM under the Cyber Security Act 2024
+          (Appendix 12, 2.1).
+
+  techreq-psr_pd:
+    source: "2.1-2.6, 5.2"
+    roles: [standard_emi, eligible_emi, nonbank_acquirer, nonbank_acquirer_major, msb,
+            msb_nondigital_fx, iri_major, dps_operator]
+    rules:
+      - paras: ["all"]
+        except: ["Part A", "13.3", "Appendix 10"]
+        remove: [eligible_emi, nonbank_acquirer_major, iri_major, dps_operator]
+        source: "2.2, 2.4 (Tier-1 follows RMiT)"
+      - paras: ["all"]
+        except: ["Part A", "16"]
+        remove: [msb_nondigital_fx]
+        source: "2.6(c)"
+      - paras: ["16"]
+        only: [msb_nondigital_fx]
+        note: Simplified Approach, for Tier-4 PSRs only (2.6(c)).
+      - paras: ["Appendix 10"]
+        only: [nonbank_acquirer, nonbank_acquirer_major]
+        note: >-
+          Merchant acquirers only, whether they follow RMiT or Tech Requirements (2.6(d),
+          footnote 7).
+      - paras: ["12.6"]
+        remove: [nonbank_acquirer, nonbank_acquirer_major]
+        source: "2.6(a)"
+      - paras: ["12.8"]
+        note: Sub-item (a) does not apply to merchant acquirers (2.6(a)).
+      - paras: ["9.4", "9.6", "10.37", "10.54", "11.3", "11.8", "11.9", "11.15", "11.16", "12.8"]
+        note: >-
+          For Tier-3 PSRs this is guidance (G), not a standard (2.6(b); for 10.54, 11.3, 11.9
+          and 12.8 only sub-items (d), (d), (a) and (a)).
+
+  emoney_pd:
+    source: "2.1, 5.2"
+    roles: [eligible_emi, standard_emi, bank_emi]
+
+  ekyc_pd:
+    source: "2.1, 2.2, 5.2"
+    roles: [licensed_bank, investment_bank, dfi, insurer_takaful, eligible_emi, standard_emi,
+            nonbank_card_issuer, msb, msb_nondigital_fx, iri_major]
+    # 5.2 names life insurers and family takaful operators only; one insurer role plus this
+    # note, rather than splitting the role (decided with Karam, 2026-11-07).
+    note: >-
+      Insurers: life insurers and family takaful operators only. Not for agent banking
+      channels (2.2).
+
+  pso_pd:
+    source: "2.1, 5.2"
+    roles: [dps_operator, shared_infra_operator, payment_system_operator]
+
+  merchant-acq_pd:
+    source: "2.1, 2.2, 5.2"
+    roles: [bank_acquirer, nonbank_acquirer, nonbank_acquirer_major]
+    rules:
+      - paras: ["9"]
+        remove: [bank_acquirer]
+        source: "2.2"
+
+  iftf_pd:
+    source: "2.1, 2.2, 5.2"
+    roles: [licensed_bank, dfi, eligible_emi, standard_emi, nonbank_card_issuer, bank_acquirer,
+            nonbank_acquirer, nonbank_acquirer_major, shared_infra_operator,
+            payment_system_operator]
+    # 2.2: a paragraph listed in this table applies to every row that lists it (footnote 1).
+    table:
+      - entity: Acquirer
+        roles: [bank_acquirer, nonbank_acquirer, nonbank_acquirer_major]
+        paras: ["9.10-9.13"]
+      - entity: Banking institution
+        roles: [licensed_bank, dfi]
+        paras: ["9.2", "9.3", "9.6-9.9"]
+      - entity: Eligible e-money issuer
+        roles: [eligible_emi]
+        paras: ["9.2", "9.6-9.9"]
+        note: Eligible EMIs offering network-based e-money (e-wallets) only (2.2, footnote 2).
+      - entity: Financial institution
+        roles: [licensed_bank, dfi, eligible_emi, standard_emi, nonbank_card_issuer,
+                bank_acquirer, nonbank_acquirer, nonbank_acquirer_major]
+        paras: ["8.4", "8.5", "9.4", "9.14", "9.15", "10.1-10.3"]
+      - entity: Operator of a shared payment infrastructure
+        roles: [shared_infra_operator]
+        paras: ["8.1-8.3", "8.7-8.19", "9.5"]
+      - entity: Other approved operator of a payment system
+        roles: [payment_system_operator]
+        paras: ["8.6", "8.7"]
+
+  mcipd_pd:
+    source: "2.1, 2.2, 5.2"
+    # 5.2's FSP list names no merchant acquirers, MSBs or operators of a designated payment
+    # system, so they are left out (decided with Karam, 2026-11-07).
+    roles: [licensed_bank, investment_bank, dfi, insurer_takaful, eligible_emi, standard_emi,
+            nonbank_card_issuer, shared_infra_operator, payment_system_operator,
+            insurance_broker_adviser, other_intermediary]
+    rules:
+      - paras: ["Part C"]
+        only: [licensed_bank, investment_bank, dfi, insurer_takaful]
+        source: "2.2"
+
+  complaints_pd:
+    source: "2.1-2.4, 5.2"
+    roles: [licensed_bank, dfi, insurer_takaful, eligible_emi, nonbank_card_issuer,
+            standard_emi, shared_infra_operator, payment_system_operator,
+            insurance_broker_adviser]
+    note: >-
+      Financial service providers: banks, DFIs, insurers and takaful operators, eligible EMIs
+      and non-bank credit card issuers with annual revenue above RM50 million. Everyone else
+      listed is an approved person: bound by 12.1-12.4 only, the rest encouraged (2.3, 2.4).
+    rules:
+      - paras: ["all"]
+        except: ["Part A", "12.1-12.4"]
+        only: [licensed_bank, dfi, insurer_takaful, eligible_emi, nonbank_card_issuer]
+        source: "2.2"
+      - paras: ["all"]
+        except: ["Part A", "12.1-12.4"]
+        note: >-
+          Binding on financial service providers; approved persons are encouraged to adopt it
+          (2.4). Non-bank credit card issuers count only if annual revenue is above RM50 million.
+
+  sandbox_pd:
+    source: "2.1, 5.2"
+    roles: [licensed_bank, investment_bank, dfi, insurer_takaful, eligible_emi, standard_emi,
+            nonbank_card_issuer, msb, msb_nondigital_fx, iri_major, insurance_broker_adviser,
+            shared_infra_operator, payment_system_operator, bank_acquirer, nonbank_acquirer,
+            nonbank_acquirer_major, fintech_company]
+
+  open-finance_ed:
+    source: "2.1, 5.2"
+    roles: [licensed_bank, investment_bank, dfi, insurer_takaful, eligible_emi]
+    note: Exposure draft (proposed), not in force. Who must share data, and when, is in Appendix 1 and 2.

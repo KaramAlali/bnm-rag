@@ -1,7 +1,10 @@
-"""Parse every PDF listed in corpus/sources.csv into corpus/chunks.jsonl and corpus/chunks.json.
+"""Parse every PDF listed in corpus/sources.csv into corpus/chunks.jsonl and corpus/chunks.json,
+with the step 2 metadata (bnm_rag.metadata) added, and write corpus/related_docs.json.
 
-The two files hold the same chunks in the same order: one per line (for streaming and the
+The two chunk files hold the same chunks in the same order: one per line (for streaming and the
 index), and one indented array (for reading). Both are written from the same run.
+related_docs.json holds only document titles, so unlike the chunks it is committed: the app
+needs the out-of-corpus list at run time, where the PDFs are not available.
 
 Usage: uv run python -m bnm_rag.parse [--verbose]
 """
@@ -12,6 +15,7 @@ import json
 import sys
 from collections import Counter
 
+from bnm_rag.metadata import enrich
 from bnm_rag.parse.document import CORPUS, parse_document, sources
 
 
@@ -21,7 +25,8 @@ def main(argv: list[str]) -> None:
     jsonl, pretty = CORPUS / "chunks.jsonl", CORPUS / "chunks.json"
     total: Counter[str] = Counter()
     every: list[dict] = []
-    for src in sources():
+    srcs = sources()
+    for src in srcs:
         chunks, rejected = parse_document(src)
         ob = Counter(c["obligation"] for c in chunks)
         total.update(ob)
@@ -32,6 +37,10 @@ def main(argv: list[str]) -> None:
             for r in rejected:
                 print("    rejected", r)
         every.extend(chunks)
+    related = enrich(every, srcs)
+    with open(CORPUS / "related_docs.json", "w", encoding="utf-8", newline="\n") as f:
+        json.dump(related, f, ensure_ascii=False, indent=2)
+        f.write("\n")
     with open(jsonl, "w", encoding="utf-8", newline="\n") as f:
         for c in every:
             f.write(json.dumps(c, ensure_ascii=False) + "\n")

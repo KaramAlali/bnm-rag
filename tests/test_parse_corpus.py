@@ -5,14 +5,11 @@ import re
 from collections import Counter
 
 import pytest
+from conftest import needs_pdfs
 
-from bnm_rag.parse.document import CORPUS, parse_document, sources
+from bnm_rag.parse.document import CORPUS
 
-SOURCES = {s["file"].removesuffix(".pdf"): s for s in sources()}
-pytestmark = pytest.mark.skipif(
-    not all((CORPUS / "raw" / s["file"]).exists() for s in SOURCES.values()),
-    reason="corpus PDFs not downloaded (scripts/download_corpus.ps1)",
-)
+pytestmark = needs_pdfs
 
 # S/G paragraph counts, checked by hand. corpus/measurements.json says 881/229: its regex
 # missed MCIPD 8.1-8.4 (seven spaces after "S") and Merchant Acquiring 14.6 (three "S"
@@ -30,16 +27,6 @@ OBLIGATIONS = {
     "open-finance_ed": (54, 5),
     "sandbox_pd": (0, 0),
 }
-
-
-@pytest.fixture(scope="session")
-def corpus() -> dict[str, dict[str, dict]]:
-    """doc_id → chunk_id → chunk, for the whole corpus (parsed once, ~30 s)."""
-    out = {}
-    for doc_id, src in SOURCES.items():
-        chunks, _ = parse_document(src)
-        out[doc_id] = {c["chunk_id"]: c for c in chunks}
-    return out
 
 
 def chunk(corpus, chunk_id: str) -> dict:
