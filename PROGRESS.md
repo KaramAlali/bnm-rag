@@ -2,38 +2,56 @@
 
 ## Now
 
-- **Current step:** 5 — Agent (tools, structured reply, citation validation, CLI)
-- **Next action:** fill `OPENROUTER_API_KEY` and `OPENROUTER_MODELS` in `.env` (Karam), then
-  build `src/bnm_rag/agent/`: LangChain 1.x `create_agent` with `search_regulations` (wraps
-  `bnm_rag.index.azure.search`, hybrid, `include_drafts=false` by default), `get_paragraph`
-  (index lookup by `doc_key`), `list_documents` (`corpus/related_docs.json`), the reply schema
-  from the plan, citation validation, status via `bnm_rag.metadata.status`; CLI
-  `uv run python -m bnm_rag.ask "…"`. Use step 4's findings (`docs/03-retrieval-results.md`):
-  the agent rewrites questions into regulatory terms and searches more than once; frame
-  paragraphs (applicability, effective date, superseded) come from metadata or a "document
-  frame" lookup, not from search.
+- **Current step:** 6 — API + UI locally (FastAPI + React/Vite, citation chips, `docker compose up`)
+- **Step 5 passed (2026-11-09):** every hard rule of the pass bar held; expected cited 95%,
+  facts 98%, faithful 86% after hand checks, coverage 91% (`docs/04-agent-results.md`).
+- **Blocker: OpenRouter credits ran out** (HTTP 402) during the last eval. Karam must top up
+  before the agent can answer again (step 6 needs it to test in the browser).
+- **Next action:** top up OpenRouter (Karam), then build step 6:
+  - FastAPI `POST /chat` wrapping `bnm_rag.agent.run.ask`, with server-sent progress events
+    (tool calls) and the final `Answer`;
+  - the React + Vite + TypeScript + Tailwind UI: citation chips open the paragraph text and
+    the PDF page link (`citation()["url"]`), the "not legal advice" notice, status badges;
+  - one Docker image, and `docker compose up` for local runs.
+  Check: the four "done" questions work in the browser.
 - **Azure (2026-11-09):** Free Trial, spending limit on, MFA; CLI via `az login`. All in
   `rg-bnm-rag`, Southeast Asia: AI Search `srch-bnm-rag-1pk6` (Free) holding index `bnm-rag`
   (2,157 docs, 15.2 MB of 50 MB); Azure OpenAI `oai-bnm-rag-1pk6` with deployment
   `text-embedding-3-small` (GlobalStandard, the only type offered there; 100K TPM). Providers
   registered: Search and CognitiveServices only (add Container Apps, ACR, Key Vault, Log
   Analytics at step 7). `.env` holds both endpoints and keys.
+- **LLM (2026-11-09):** OpenRouter, key in `.env` (Karam).
+  - Karam chose GLM and DeepSeek. `.env` now holds
+    `OPENROUTER_MODELS=deepseek/deepseek-v4.1-flash-1017,z-ai/glm-5.3`: DeepSeek's dated
+    snapshot first, GLM as the fallback. Comma-separated, tried in order. The eval's judge is
+    `z-ai/glm-5.3` (`JUDGE_MODEL`), so it isn't the model that answered.
+  - Both support tools and structured output on OpenRouter. Both made a correct tool call in a
+    smoke test.
+  - Prices per million tokens, input/output: GLM-5.3 $0.07/$1.40, DeepSeek V4.1 Flash
+    $0.05/$0.57.
 - **Index commands:** rebuild `uv run python -m bnm_rag.index` (embeddings cached in
   `corpus/embeddings.cache.jsonl`, git-ignored); eval `uv run python -m bnm_rag.index.evaluate`
   → `evals/retrieval_results.md`; live checks `uv run pytest -m azure`.
+- **Agent commands:** ask `uv run python -m bnm_rag.ask "…" [--date YYYY-MM-DD] [--verbose]`;
+  golden eval `uv run python -m bnm_rag.agent.evaluate [ids]` → `evals/agent_results.md`
+  (replies in `evals/agent_answers.jsonl`, git-ignored); live test `uv run pytest -m llm`.
 - **Open questions for Karam:**
-  1. Interpretation paragraphs (5.2, one chunk of 2.5k–7k characters holding every
-     definition) are never in the top 5. Split them into one chunk per defined term (parser
-     change), or leave them whole and let the agent fetch them with `get_paragraph`?
-  2. Which OpenRouter models for the fallback chain (the same as Aina's?)
+  1. g12's `must_not_say` ("a detailed list of changes presented as coming from the documents")
+     predates finding the RMiT FAQ's own revision history, which the agent now quotes and
+     attributes correctly. Reword it to "…not drawn from the indexed documents"?
+  2. Coverage labels: g11, g33, g35 say `partial` (and g04 `partial`, not `not_covered`)
+     because un-indexed documents also apply. Accept `partial` there, or keep the labels strict?
   3. Still open from step 2: RMiT Appendix 12 is pending NACSA's endorsement. If you learn the
      date, give it and I'll set it.
+- **Decision (Karam, 2026-11-09): definitions stay whole.** The Interpretation paragraphs
+  (5.2, 2.5k–7k characters each) stay one chunk per document. They're never in the top 5, so
+  the agent fetches them with `get_paragraph(doc_id, "5.2")` when a defined term matters. No
+  parser change.
 - **Design note for step 5:** don't hard-filter retrieval on `applies_to`. "This rule doesn't
   bind you" is often the right answer (golden g18, g34, g44 cite chunks that exclude the asker),
   so use `applies_to` to label citations and steer the answer, not to drop chunks.
-- **Read for this step:** `docs/02-phase1-plan.md` → Agent tools, step 5;
-  `docs/03-retrieval-results.md` → Findings; `src/bnm_rag/index/azure.py` (search API);
-  `src/bnm_rag/metadata/status.py`; the LangChain 1.x `create_agent` docs (LangChain docs MCP).
+- **Read for this step:** `docs/02-phase1-plan.md` → Stack (API, UI), step 6, "What done
+  means"; `src/bnm_rag/agent/run.py` (`ask`, `Answer`) and `reply.py` (`citation`).
 
 ## Steps (Phase 1)
 
@@ -44,7 +62,7 @@ Details and the check for each step: `docs/02-phase1-plan.md` → "Build steps".
 - [x] 2. Metadata (Part A, applicability YAML, FAQ links, out-of-corpus list)
 - [x] 3. Golden set (`evals/golden.yaml`, reviewed by Karam)
 - [x] 4. Index (Azure AI Search Free tier; retrieval comparison)
-- [ ] 5. Agent (tools, structured reply, citation validation)
+- [x] 5. Agent (tools, structured reply, citation validation)
 - [ ] 6. API + UI locally
 - [ ] 7. Deploy to Azure
 - [ ] 8. Case-study README
@@ -52,6 +70,54 @@ Details and the check for each step: `docs/02-phase1-plan.md` → "Build steps".
 ## Log
 
 Newest first. One entry per work session: what was done, decisions, anything surprising.
+
+- 2026-11-09 — Step 5 passed. Karam asked for a rerun of only the 7 targeted questions.
+  - The 5 former crashes all answer now.
+  - g27 now limits Appendix 10 to merchant acquiring.
+  - g12 now says a comparison isn't possible and answers partial. Its judge call failed
+    because the OpenRouter credits ran out (HTTP 402), so it was hand-checked and passed: the
+    list matches the RMiT FAQ's revision history.
+  - Merged run: 44/44 answered, 0 forbidden claims, expected cited 95%, facts 98%, faithful
+    86% (judge 37/44 plus g21 cleared by hand), coverage 91%.
+  - The judge now retries once when it returns no verdict. A partial rerun merges into the
+    saved results.
+
+- 2026-11-09 — Step 5 built, not yet ticked.
+  - **Models:** Karam chose GLM and DeepSeek. Then `.env` was changed to DeepSeek's dated
+    snapshot first, GLM as the fallback.
+  - **Definitions:** Karam decided they stay whole; the agent fetches 5.2 with `get_paragraph`.
+  - **Index:** gained an index-only `frame_kind` field (applicability / effective_date /
+    interpretation / superseded), so `get_document_frame(doc_id)` fetches those paragraphs by
+    filter. The index was rebuilt from cached embeddings; storage is 15.0 MB.
+  - **Agent** (`src/bnm_rag/agent/`):
+    - four tools that return their chunks as artifacts;
+    - a structured `Reply`;
+    - checks: citations must come from this run's tool results (footnote and sub-item
+      suffixes such as "2.4, footnote 4" resolve to the paragraph), an answer must cite
+      something, a draft must be called "proposed";
+    - up to 2 sends back, `ModelFallbackMiddleware`, a 120 s request timeout;
+    - the CLI `bnm_rag.ask`;
+    - `agent/evaluate.py`: code scores plus a GLM-5.3 judge that sees the cited paragraphs as
+      the agent saw them.
+    - New dependencies: langchain 1.4, langchain-openrouter.
+  - **Golden run** (`docs/04-agent-results.md`): 39 of 44 answered, 93% of expected paragraphs
+    cited (vs 51% for one raw search), 95% of required facts, 2 forbidden claims (g12, g27).
+  - **Spot-check:** 5 real errors, 3 small overreaches, 1 over-strict judge, 4 debatable
+    `partial` labels.
+  - **Surprises:**
+    - ChatOpenRouter has no timeout by default; one stalled call held a question for 405 s.
+    - 5 questions ended without calling the Reply tool. That's now sent back like any other
+      failed check, but not rerun yet, at Karam's call.
+    - `evals/agent_answers.jsonl` holds the cited paragraphs' full text, so it's git-ignored.
+  - 121 offline tests pass.
+  - **Later the same day:**
+    - Karam agreed the pass bar (plan step 5, golden.yaml header) and asked for no full
+      rerun.
+    - g27 traced to a data gap: TR 2.2 lists Appendix 10, but its acquirer-only scope sits in
+      2.6(d), footnote 7 and FAQ Q3, none linked to 2.2. Fixed with a curated note on 2.2;
+      index rebuilt, all embeddings from cache.
+    - Prompt rules added for "what changed" (g12) and for not inferring dates or sums.
+    - The issue date added to rendered chunks.
 
 - 2026-11-09 — Step 4 done: `src/bnm_rag/index/`:
   - `documents.py`: chunk ↔ search document. The key is the chunk id in base64, because chunk

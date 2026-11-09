@@ -93,6 +93,13 @@ documents:
       - paras: ["16"]
         only: [msb_nondigital_fx]
         note: Simplified Approach, for Tier-4 PSRs only (2.6(c)).
+      # 2.2 lists "2.7, 13.3 and Appendix 10" for RMiT firms; the agent read Appendix 10 as
+      # applying to an eligible EMI (golden g27, 2026-11-09). The narrowing sits in 2.6(d) and
+      # footnote 7, and FAQ Q3 says it outright.
+      - paras: ["2.2"]
+        note: >-
+          Of these, Appendix 10 applies only to PSRs that conduct merchant acquiring business
+          (2.6(d), footnote 7; FAQ Q3).
       - paras: ["Appendix 10"]
         only: [nonbank_acquirer, nonbank_acquirer_major]
         note: >-

@@ -19,6 +19,12 @@
 #   reviewed      set to true once Karam has checked the expected answer against the PDF
 #
 # A test (tests/test_golden.py) checks the format, the roles, and that every chunk_id exists.
+#
+# Pass bar for the agent (docs/02-phase1-plan.md, step 5):
+# - Hard rules, every question: no draft presented as a rule; citations only from that run's
+#   tool results; no must_not_say claim; no invented out-of-corpus answer; no crashes.
+# - Targets: expected cited ≥ 90%, must_say ≥ 90%, faithful ≥ 85%, coverage right ≥ 85%.
+# Judge flags count only after a hand check.
 
 as_of: 2026-11-07
 

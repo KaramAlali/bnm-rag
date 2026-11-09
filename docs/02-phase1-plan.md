@@ -53,7 +53,7 @@ documents were written for. The golden set and the README examples use this pers
 - Questions about the Open Finance exposure draft are answered as **proposed**, never as rules.
 - Out-of-corpus questions (crypto exchanges, AML/CFT) get "not covered", naming the document
   that would cover it when the corpus knows it.
-- A 40-question golden set passes the agreed bar (step 3), run in CI with no LLM calls for the
+- A 40-question golden set passes the agreed bar (step 5, "Pass bar" below), run in CI with no LLM calls for the
   retrieval part.
 
 ## Stack
@@ -176,6 +176,31 @@ the model (the Aina/Kedai Rumah validation pattern).
    (`uv run python -m bnm_rag.ask "…"`). *Check:* golden set end to end, code-scored (right
    coverage, cited paragraphs, no draft quoted as a rule), plus an LLM judge on faithfulness,
    spot-checked by hand.
+
+   **Pass bar** (agreed with Karam 2026-11-09). The judge flags; a hand check confirms before a
+   flag counts.
+
+   *Hard rules, every question:*
+   - no exposure draft presented as a rule;
+   - every citation comes from that run's tool results;
+   - no `must_not_say` claim;
+   - no invented answer to an out-of-corpus question;
+   - every question gets a reply (no crashes).
+
+   *Quality targets:*
+   - expected paragraphs cited ≥ 90%;
+   - `must_say` facts stated ≥ 90%;
+   - faithful to the cited paragraphs ≥ 85%;
+   - coverage label right ≥ 85%.
+
+   One clean run passes. After later prompt or model changes, rerun the questions the change
+   could affect. A full rerun is not needed for every change (Karam).
+
+   *Done 2026-11-09:* `src/bnm_rag/agent/` plus the CLI.
+   - Method: a full run, then a rerun of the 7 questions the fixes targeted.
+   - Results: every hard rule held. Expected paragraphs cited 95%, facts 98%, faithful 86%
+     (after hand checks), coverage 91%.
+   - Details in `docs/04-agent-results.md`.
 6. **API + UI locally.** FastAPI + React, citation chips opening the paragraph and the PDF
    page link. `docker compose up` runs it all. *Check:* the four "done" questions above work in
    the browser.

@@ -53,6 +53,9 @@ def index_definition(name: str, compress: bool = False) -> SearchIndex:
         _field("effective_from", filterable=True),
         _field("effective_until", filterable=True),
         _field("applies_to", Strings, filterable=True, facetable=True),
+        # Index-only (not a chunk field): applicability / effective_date / interpretation /
+        # superseded for Part A frame paragraphs, else null (documents.frame_kind).
+        _field("frame_kind", filterable=True),
         _field("meta"),
         SearchField(
             name="vector",

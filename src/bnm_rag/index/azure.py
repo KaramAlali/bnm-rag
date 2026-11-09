@@ -15,13 +15,14 @@ from functools import cache
 from pathlib import Path
 
 from azure.core.credentials import AzureKeyCredential
+from azure.core.exceptions import ResourceNotFoundError
 from azure.search.documents import SearchClient
 from azure.search.documents.indexes import SearchIndexClient
 from azure.search.documents.models import VectorizedQuery
 from dotenv import load_dotenv
 from openai import OpenAI
 
-from bnm_rag.index.documents import chunk_from_document
+from bnm_rag.index.documents import chunk_from_document, doc_key
 from bnm_rag.parse.document import CORPUS, ROOT
 
 # Embeddings already paid for, keyed by (deployment, text): rebuilding the index after a schema
@@ -105,6 +106,21 @@ def embed(texts: list[str], cache_path: Path | None = CACHE) -> tuple[list[list[
 
 def embed_query(text: str) -> list[float]:
     return embed([text], cache_path=None)[0][0]
+
+
+def get_chunk(chunk_id: str) -> dict | None:
+    """One chunk by id (a key lookup, no search), or None if there is no such chunk."""
+    try:
+        return chunk_from_document(search_client().get_document(doc_key(chunk_id)))
+    except ResourceNotFoundError:
+        return None
+
+
+def chunks_where(filter: str, top: int = 100) -> list[dict]:
+    """Every chunk matching an OData filter (no ranking), e.g. a document's frame paragraphs.
+    Callers must build `filter` from validated values only (doc ids from the catalog)."""
+    return [chunk_from_document(r) for r in search_client().search(
+        search_text="*", filter=filter, top=top)]
 
 
 def search(query: str, mode: str = "hybrid", top: int = 5, filter: str | None = None,

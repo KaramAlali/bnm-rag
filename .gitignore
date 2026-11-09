@@ -21,6 +21,9 @@ corpus/chunks.jsonl
 corpus/chunks.json
 corpus/embeddings.cache.jsonl
 
+# Agent eval replies hold the full text of every cited paragraph; the summary is committed
+evals/agent_answers.jsonl
+
 # Editors / OS
 .vscode/
 .idea/

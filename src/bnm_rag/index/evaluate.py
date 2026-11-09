@@ -16,13 +16,13 @@ from __future__ import annotations
 
 import datetime as dt
 import json
-import re
 import sys
 from collections import defaultdict
 from pathlib import Path
 
 import yaml
 
+from bnm_rag.index.documents import frame_kind
 from bnm_rag.parse.document import CORPUS, ROOT
 
 GOLDEN = ROOT / "evals" / "golden.yaml"
@@ -30,16 +30,11 @@ OUT = ROOT / "evals" / "retrieval_results.md"
 KS = (5, 10, 20)
 DEPTH = max(KS)
 
-# "Frame" paragraphs say who a document applies to, what its terms mean, when it starts and
-# what it replaces. Answers need them, but they rarely share words or meaning with a question
-# ("which tech rules apply and when?" vs "This policy document comes into effect on ..."), so
-# they are scored apart from the content paragraphs.
-FRAME = re.compile(r"^\d+\.?\s+(Applicability|Effective date|Interpretation|"
-                   r"Policy documents and circulars superseded)", re.IGNORECASE)
-
-
 def role(chunk: dict) -> str:
-    return "frame" if FRAME.match(chunk.get("section") or "") else "content"
+    """Frame paragraphs (documents.frame_kind) rarely share words or meaning with a question
+    ("which tech rules apply and when?" vs "This policy document comes into effect on ..."),
+    so they are scored apart from the content paragraphs."""
+    return "frame" if frame_kind(chunk) else "content"
 
 
 def ranks(expected: list[str], retrieved: list[str]) -> dict[str, int | None]:

@@ -11,11 +11,30 @@ from __future__ import annotations
 
 import base64
 import json
+import re
 
 # Chunk fields that get their own index field (see schema.py); everything else goes in `meta`.
 OWN_FIELDS = ("chunk_id", "doc_id", "para_no", "kind", "obligation", "title", "reference",
               "heading_path", "text", "page_start", "page_end", "source_url", "figure",
               "issued", "effective_from", "effective_until", "applies_to")
+
+
+# "Frame" paragraphs (Part A): who a document applies to, what its terms mean, when it starts
+# and what it replaces. Search rarely finds them (docs/03-retrieval-results.md), so the index
+# tags them and the agent fetches them per document. Section titles vary slightly
+# ("4. Effective Date", "4. Effective date and policy document superseded",
+# "2 Applicability and Legal Effect" in RMiT Appendix 12).
+FRAME_KINDS = (
+    ("applicability", re.compile(r"^\d+\.?\s+Applicability", re.I)),
+    ("effective_date", re.compile(r"^\d+\.?\s+Effective date", re.I)),
+    ("interpretation", re.compile(r"^\d+\.?\s+Interpretation", re.I)),
+    ("superseded", re.compile(r"^\d+\.?\s+Policy documents and circulars superseded", re.I)),
+)
+
+
+def frame_kind(chunk: dict) -> str | None:
+    section = chunk.get("section") or ""
+    return next((kind for kind, pattern in FRAME_KINDS if pattern.match(section)), None)
 
 
 def doc_key(chunk_id: str) -> str:
@@ -44,6 +63,7 @@ def search_document(chunk: dict, vector: list[float]) -> dict:
     doc = {k: chunk.get(k) for k in OWN_FIELDS}
     doc["id"] = doc_key(chunk["chunk_id"])
     doc["content"] = embedding_text(chunk)
+    doc["frame_kind"] = frame_kind(chunk)
     doc["vector"] = vector
     doc["meta"] = json.dumps({k: v for k, v in chunk.items() if k not in OWN_FIELDS},
                              ensure_ascii=False)
