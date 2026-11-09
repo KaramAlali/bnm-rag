@@ -2,39 +2,38 @@
 
 ## Now
 
-- **Current step:** 4 — Index (Azure AI Search, Free tier, Southeast Asia)
-- **Next action:** Azure resources exist and `.env` is filled (see below). Build
-  `src/bnm_rag/index/` that (1) builds one search document per chunk from `chunks.jsonl`
-  (text with heading path, plus filterable `doc_id`, `kind`, `obligation`, `applies_to`,
-  `effective_from`, `effective_until`, page, source URL; no stored status), (2) embeds with
-  Azure OpenAI `text-embedding-3-small`, (3) creates the index and uploads. Check the index size
-  stays under the Free tier's 50 MB. Then an eval script: recall@5 of each golden question's
-  `expected` chunks for keyword, vector and hybrid search, written to
-  `docs/03-retrieval-results.md`. Azure tests use the `azure` pytest marker (opt-in).
-- **Azure account (checked 2026-11-09):** Free Trial subscription "Azure subscription 1",
-  enabled, spending limit on; Karam signs in with a personal Microsoft account (Gmail address)
-  with MFA; Azure CLI 2.92.0 installed (`az login`). Registered providers: `Microsoft.Search`,
-  `Microsoft.CognitiveServices` only (register Container Apps, ACR, Key Vault, Log Analytics
-  at step 7). In Southeast Asia: Search is offered and no search service exists yet (the one
-  Free slot is open); `text-embedding-3-small` is offered only as GlobalStandard or
-  DataZoneStandard (no regional Standard), GlobalStandard quota 1000 (K tokens/min).
-- **Azure resources (created 2026-11-09, all in `rg-bnm-rag`, Southeast Asia):** AI Search
-  `srch-bnm-rag-1pk6` (Free: 3 indexes, 50 MB storage, no separate vector quota); Azure OpenAI
-  `oai-bnm-rag-1pk6` (S0, pay per token) with deployment `text-embedding-3-small` (v1,
-  GlobalStandard, 100K TPM). Both smoke-tested (1536-dim vector; `servicestats`). `.env` holds
-  both endpoints and keys; OpenRouter values still empty (needed at step 5).
-- **Size watch for the 50 MB limit:** 2,157 chunks × 1536 float32 ≈ 13 MB of raw vectors before
-  HNSW overhead. Set the vector field `stored: false` and consider scalar (int8) compression if
-  the index gets close.
+- **Current step:** 5 — Agent (tools, structured reply, citation validation, CLI)
+- **Next action:** fill `OPENROUTER_API_KEY` and `OPENROUTER_MODELS` in `.env` (Karam), then
+  build `src/bnm_rag/agent/`: LangChain 1.x `create_agent` with `search_regulations` (wraps
+  `bnm_rag.index.azure.search`, hybrid, `include_drafts=false` by default), `get_paragraph`
+  (index lookup by `doc_key`), `list_documents` (`corpus/related_docs.json`), the reply schema
+  from the plan, citation validation, status via `bnm_rag.metadata.status`; CLI
+  `uv run python -m bnm_rag.ask "…"`. Use step 4's findings (`docs/03-retrieval-results.md`):
+  the agent rewrites questions into regulatory terms and searches more than once; frame
+  paragraphs (applicability, effective date, superseded) come from metadata or a "document
+  frame" lookup, not from search.
+- **Azure (2026-11-09):** Free Trial, spending limit on, MFA; CLI via `az login`. All in
+  `rg-bnm-rag`, Southeast Asia: AI Search `srch-bnm-rag-1pk6` (Free) holding index `bnm-rag`
+  (2,157 docs, 15.2 MB of 50 MB); Azure OpenAI `oai-bnm-rag-1pk6` with deployment
+  `text-embedding-3-small` (GlobalStandard, the only type offered there; 100K TPM). Providers
+  registered: Search and CognitiveServices only (add Container Apps, ACR, Key Vault, Log
+  Analytics at step 7). `.env` holds both endpoints and keys.
+- **Index commands:** rebuild `uv run python -m bnm_rag.index` (embeddings cached in
+  `corpus/embeddings.cache.jsonl`, git-ignored); eval `uv run python -m bnm_rag.index.evaluate`
+  → `evals/retrieval_results.md`; live checks `uv run pytest -m azure`.
 - **Open questions for Karam:**
-  1. Still open from step 2: RMiT Appendix 12 is pending NACSA's endorsement. If you learn the
+  1. Interpretation paragraphs (5.2, one chunk of 2.5k–7k characters holding every
+     definition) are never in the top 5. Split them into one chunk per defined term (parser
+     change), or leave them whole and let the agent fetch them with `get_paragraph`?
+  2. Which OpenRouter models for the fallback chain (the same as Aina's?)
+  3. Still open from step 2: RMiT Appendix 12 is pending NACSA's endorsement. If you learn the
      date, give it and I'll set it.
 - **Design note for step 5:** don't hard-filter retrieval on `applies_to`. "This rule doesn't
   bind you" is often the right answer (golden g18, g34, g44 cite chunks that exclude the asker),
   so use `applies_to` to label citations and steer the answer, not to drop chunks.
-- **Read for this step:** `docs/02-phase1-plan.md` → Stack, Monthly cost, step 4;
-  `evals/golden.yaml`; `.env.example`. Run `uv run python -m bnm_rag.parse` first (chunks are
-  git-ignored).
+- **Read for this step:** `docs/02-phase1-plan.md` → Agent tools, step 5;
+  `docs/03-retrieval-results.md` → Findings; `src/bnm_rag/index/azure.py` (search API);
+  `src/bnm_rag/metadata/status.py`; the LangChain 1.x `create_agent` docs (LangChain docs MCP).
 
 ## Steps (Phase 1)
 
@@ -44,7 +43,7 @@ Details and the check for each step: `docs/02-phase1-plan.md` → "Build steps".
 - [x] 1. Parser (PDF → `corpus/chunks.jsonl`)
 - [x] 2. Metadata (Part A, applicability YAML, FAQ links, out-of-corpus list)
 - [x] 3. Golden set (`evals/golden.yaml`, reviewed by Karam)
-- [ ] 4. Index (Azure AI Search Free tier; retrieval comparison)
+- [x] 4. Index (Azure AI Search Free tier; retrieval comparison)
 - [ ] 5. Agent (tools, structured reply, citation validation)
 - [ ] 6. API + UI locally
 - [ ] 7. Deploy to Azure
@@ -53,6 +52,28 @@ Details and the check for each step: `docs/02-phase1-plan.md` → "Build steps".
 ## Log
 
 Newest first. One entry per work session: what was done, decisions, anything surprising.
+
+- 2026-11-09 — Step 4 done: `src/bnm_rag/index/`:
+  - `documents.py`: chunk ↔ search document. The key is the chunk id in base64, because chunk
+    ids contain ':', ' ' and '/'. Fields the app filters on or shows get their own index field;
+    the rest go in a JSON `meta` field. Every chunk round-trips exactly, so the deployed app
+    needs only the index. No status stored.
+  - `schema.py`: BM25 on `content` (en.microsoft analyzer); HNSW cosine on `vector`, set to
+    `stored: false`; int8 compression behind `--compress`.
+  - `azure.py`: an OpenAI v1 client on the Azure endpoint, plus embeddings cached in
+    `corpus/embeddings.cache.jsonl`.
+  - `search()`: keyword, vector and hybrid modes.
+  - `evaluate.py`: recall@5/10/20, all@5 and hit@5, by group and by content vs frame paragraph.
+  - New dependencies: azure-search-documents 12, openai 3, python-dotenv.
+
+  Index built: 2,157 documents, 15.2 MB of storage (30% of 50 MB); the vector index of 38.3 MB
+  has no Free-tier quota. Embedding took about 300k tokens, under 1 cent, in 250 s. Results in
+  `docs/03-retrieval-results.md`: recall@5 is keyword 35%, vector 47%, hybrid 51% (all@5 22/29/37%).
+  Frame paragraphs (applicability, effective date, interpretation, superseded) reach the top 5
+  only about 25% of the time, so in step 5 they come from metadata or lookup, not search.
+  Surprise: g01 ("e-wallet with RM800m") retrieves the e-Money PD wallet limits in every mode,
+  while the same question in regulatory terms (g09) finds Tech Requirements 2.4 at rank 1, so
+  the agent must rewrite queries. 104 offline tests and 4 Azure tests pass.
 
 - 2026-11-09 — Step 4 prep: Karam created the Azure account (Free Trial, spending limit on)
   and turned on MFA; Azure CLI installed via winget. Registered `Microsoft.Search` and

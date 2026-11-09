@@ -168,6 +168,10 @@ the model (the Aina/Kedai Rumah validation pattern).
 4. **Index.** Create the Azure AI Search index (Free tier), embed and upload. Compare keyword,
    vector and hybrid on the golden set (recall@5 of expected paragraphs). *Check:* index size
    under the Free limit; recall numbers recorded in `docs/03-retrieval-results.md`.
+   *Done 2026-11-09:* `src/bnm_rag/index/`. Storage is 15.2 MB of 50 MB. recall@5: keyword 35%,
+   vector 47%, hybrid 51%, so the agent uses hybrid. Frame paragraphs (applicability, effective
+   date, superseded) are rarely found by search, so the agent gets them from metadata or by
+   lookup. Questions phrased about the asker's situation need rewriting before searching.
 5. **Agent.** Tools, structured reply, citation validation, status computation, a CLI
    (`uv run python -m bnm_rag.ask "…"`). *Check:* golden set end to end, code-scored (right
    coverage, cited paragraphs, no draft quoted as a rule), plus an LLM judge on faithfulness,

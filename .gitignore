@@ -19,6 +19,7 @@ corpus/text/
 corpus/measurements.json
 corpus/chunks.jsonl
 corpus/chunks.json
+corpus/embeddings.cache.jsonl
 
 # Editors / OS
 .vscode/

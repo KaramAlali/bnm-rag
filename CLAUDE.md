@@ -67,6 +67,11 @@ When the user says "continue" (or anything like it):
   applies to, the Tech Requirements tiers) are hand-written; `corpus/related_docs.json`
   (related/superseded documents and the out-of-corpus list) is generated but **committed**,
   because the app needs it where the PDFs are not available; a test fails if it is stale.
+- Index (step 4): `uv run python -m bnm_rag.index` rebuilds the Azure AI Search index from
+  `chunks.jsonl` (drops and recreates it). The index holds every chunk field, so the deployed
+  app needs no `chunks.jsonl`. Embeddings are cached in `corpus/embeddings.cache.jsonl`
+  (git-ignored). Retrieval eval: `uv run python -m bnm_rag.index.evaluate` →
+  `evals/retrieval_results.md`.
 - Licensing: index the documents, show short excerpts, always link to the source PDF. Never
   republish whole documents.
 
