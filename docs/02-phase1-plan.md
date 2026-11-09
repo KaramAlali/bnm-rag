@@ -64,7 +64,7 @@ documents were written for. The golden set and the README examples use this pers
 | PDF parsing | PyMuPDF (`pymupdf`) | Text spans with font size, so footnote markers (superscripts) can be told apart from body digits. AGPL: fine for a public repo |
 | Applicability tables | Hand-written YAML in `corpus/curated/`, with tests | Only a few tables matter and extraction mixes their columns (report finding 5) |
 | Index | **Azure AI Search**, hybrid (BM25 + vector) | The Azure skill the job market asks for; built-in hybrid ranking |
-| Embeddings | Azure OpenAI `text-embedding-3-small` (check region/deployment availability in step 4) | ~330k tokens to embed once, a few cents |
+| Embeddings | Azure OpenAI `text-embedding-3-small`, **GlobalStandard** deployment (the only type offered in Southeast Asia, checked 2026-11-09; processing may be in any region, fine for public documents) | ~330k tokens to embed once, a few cents |
 | Agent | LangChain 1.x `create_agent`, a few tools, structured reply | Same pattern as Kedai Rumah, multi-search for cross-document questions |
 | LLM | OpenRouter model chain with fallback, as in Aina | Already working; Azure OpenAI chat can be swapped in later |
 | API | FastAPI, `POST /chat` with server-sent progress events | Known stack |
